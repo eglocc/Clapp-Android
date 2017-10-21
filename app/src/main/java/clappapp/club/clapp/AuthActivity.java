@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 public class AuthActivity extends AppCompatActivity {
 
+    private int a;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
