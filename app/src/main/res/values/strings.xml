@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Clapp</string>
+    <string name="app_headline">CLAPP</string>
+    <string name="follower_number_label">Followers: </string>
+    <string name="event_number_label">Events: </string>
+    <string name="member_number_label">Members: </string>
+    <string name="upcoming_events_number_label">Upcoming Events: </string>
+    <string name="total_events_number_label">"Total Events: "</string>
+    <string name="temp_event_text">Some Text Some Text Some Text Some Text Some Text Some Text
+        Some Text Some Text Some Text Some Text Some Text Some Text Some Text Some Text Some Text
+        Some Text Some Text Some Text Some Text Some Text</string>
+    <string name="login">LOGIN</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="email_hint">E-mail</string>
+    <string name="password_hint">Password</string>
+    <string name="continue_as_a_guest">CONTINUE AS A GUEST</string>
+
+</resources>

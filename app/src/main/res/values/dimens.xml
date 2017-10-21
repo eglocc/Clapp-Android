@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="default_horizontal_margin">16dp</dimen>
+    <dimen name="default_vertical_margin">8dp</dimen>
+    <dimen name="default_headliner_size">48sp</dimen>
+    <dimen name="default_head_size">24sp</dimen>
+    <dimen name="default_sub_head_size">18sp</dimen>
+
+</resources>
