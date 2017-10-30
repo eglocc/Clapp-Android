@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/default_horizontal_margin"
+    android:paddingStart="@dimen/default_horizontal_margin"
+    android:paddingRight="@dimen/default_horizontal_margin"
+    android:paddingEnd="@dimen/default_horizontal_margin">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/tab_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/event_title_input_layout"
+        android:paddingTop="@dimen/default_vertical_margin">
+
+        <ImageView
+            android:id="@+id/step_1_image"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/numeric_1_box_outline"
+            android:layout_marginRight="@dimen/default_vertical_margin"
+            android:layout_marginEnd="@dimen/default_vertical_margin" />
+
+        <ImageView
+            android:id="@+id/step_2_image"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/numeric_2_box_outline"
+            android:layout_marginRight="@dimen/default_vertical_margin"
+            android:layout_marginEnd="@dimen/default_vertical_margin" />
+
+        <ImageView
+            android:id="@+id/step_3_image"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/numeric_3_box_outline" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/event_image"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:layout_constraintTop_toBottomOf="@+id/event_title_input_layout"
+        app:layout_constraintRight_toRightOf="parent"
+
+        tools:src="@drawable/plus_box_outline"
+        android:padding="32dp"
+        android:layout_marginTop="@dimen/default_vertical_margin" />
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/event_title_input_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tab_layout"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <EditText
+            android:id="@+id/event_title_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/event_title" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <!--
+        <Spinner
+            android:id="@+id/event_type_spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toLeftOf="@+id/event_image"
+            app:layout_constraintEnd_toStartOf="@id/event_image"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/event_title_input_layout"
+            app:layout_constraintBottom_toBottomOf="@+id/event_image"
+            android:spinnerMode="dialog"
+            android:prompt="@string/event_type_prompt" />
+            -->
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/event_date_input_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/event_time_input_layout"
+        app:layout_constraintEnd_toStartOf="@+id/event_time_input_layout"
+        app:layout_constraintTop_toBottomOf="@+id/event_image"
+        android:paddingRight="8dp"
+        android:paddingEnd="8dp">
+
+        <EditText
+            android:id="@+id/event_date_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:hint="22/10/2017"
+            android:inputType="date"
+            android:drawableRight="@drawable/calendar_blank"
+            android:drawableEnd="@drawable/calendar_blank" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/event_time_input_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/event_date_input_layout"
+        app:layout_constraintStart_toEndOf="@id/event_date_input_layout"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/event_image"
+        android:paddingLeft="8dp"
+        android:paddingStart="8dp">
+
+        <EditText
+            android:id="@+id/event_time_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:hint="01:30"
+            android:inputType="time"
+            android:drawableEnd="@drawable/clock"
+            android:drawableRight="@drawable/clock"
+
+            />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/event_place_input_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/event_date_input_layout">
+
+        <EditText
+            android:id="@+id/event_place_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/event_place"
+            android:drawableEnd="@drawable/map_marker"
+            android:drawableRight="@drawable/map_marker" />
+
+    </android.support.design.widget.TextInputLayout>
+
+</android.support.constraint.ConstraintLayout>

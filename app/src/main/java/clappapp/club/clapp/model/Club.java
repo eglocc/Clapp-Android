@@ -2,15 +2,10 @@ package clappapp.club.clapp.model;
 
 import java.util.ArrayList;
 
-/**
- * Created by enver on 21.10.2017.
- */
-
 public class Club {
     public Club() {
     }
 
-    ;
     private String mName;
     private Long mID;
     private Long mPresident;

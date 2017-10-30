@@ -1,10 +1,6 @@
 package clappapp.club.clapp.model;
 
-/**
- * Created by enver on 21.10.2017.
- */
-
-public class Enums {
+class Enums {
     public enum Privacy {
         GLOBAL,
         LOCAL,

@@ -2,15 +2,11 @@ package clappapp.club.clapp.model;
 
 import java.util.ArrayList;
 
-/**
- * Created by enver on 21.10.2017.
- */
-
 public class Event {
     public Event() {
     }
 
-    ;
+
     private Long mID;
     private Enums.EventType mType;
     private String mTitle;

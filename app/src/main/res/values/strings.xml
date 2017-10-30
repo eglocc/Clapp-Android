@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Clapp</string>
-    <string name="app_headline">CLAPP</string>
+    <string name="app_name">Clapp!</string>
+    <string name="app_headline">CLAPP!</string>
     <string name="follower_number_label">Followers: </string>
     <string name="event_number_label">Events: </string>
     <string name="member_number_label">Members: </string>
@@ -16,5 +16,9 @@
     <string name="email_hint">E-mail</string>
     <string name="password_hint">Password</string>
     <string name="continue_as_a_guest">CONTINUE AS A GUEST</string>
+    <string name="event_title">Title</string>
+    <string name="event_type_prompt">Choose event type</string>
+    <string name="event_description">Description</string>
+    <string name="event_place">Place</string>
 
 </resources>
