@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AuthActivity"
+    tools:context=".controller.AuthActivity"
     android:paddingLeft="@dimen/default_horizontal_margin"
     android:paddingRight="@dimen/default_horizontal_margin"
     android:paddingEnd="@dimen/default_horizontal_margin"

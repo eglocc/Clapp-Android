@@ -23,4 +23,10 @@ public class Enums {
         NIGHTOUT,
         TRAINING
     }
+
+    public enum Gender {
+        MALE,
+        FEMALE,
+        OTHER
+    }
 }

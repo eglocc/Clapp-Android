@@ -1,7 +1,9 @@
-package clappapp.club.clapp;
+package clappapp.club.clapp.controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import clappapp.club.clapp.R;
 
 public class AuthActivity extends AppCompatActivity {
 
