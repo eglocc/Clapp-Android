@@ -9,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".controller.AuthActivity"></activity>
         <activity android:name=".controller.CreateAccount">
+        <activity android:name=".controller.CreateEventActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
