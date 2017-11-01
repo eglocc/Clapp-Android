@@ -10,8 +10,16 @@
     <string name="total_events_number_label">"Total Events: "</string>
     <string name="login">LOGIN</string>
     <string name="sign_up">SIGN UP</string>
-    <string name="email_hint">E-mail</string>
+    <string name="name_hint">Name</string>
+    <string name="surname_hint">Surname</string>
+    <string name="email_hint">Email</string>
     <string name="password_hint">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="other">Keep me fuckin\' away from you norms!</string>
     <string name="continue_as_a_guest">CONTINUE AS A GUEST</string>
     <string name="event_title">Title</string>
     <string name="event_type_prompt">Choose event type</string>
@@ -27,5 +35,21 @@
     <string name="training">Training</string>
     <string name="next">Next</string>
     <string name="generate_chat">Generate chat group</string>
+
+    <string name="no_name_error">Name field can\'t be empty!</string>
+    <string name="no_email_error">Email field can\'t be empty!</string>
+    <string name="no_surname_error">Surname field can\'t be empty!</string>
+    <string name="email_not_valid_error">Email is not valid!</string>
+    <string name="name_too_short_error">Name must be at least 2 characters!</string>
+    <string name="surname_too_short_error">Surname must be at least 2 characters!</string>
+    <string name="password_too_short_error">Password must contain at least 8 characters!</string>
+    <string name="password_too_weak_error">Password must contain at least two of: letter, number, special character!</string>
+    <string name="no_date_of_birth_error">Date of Birth can\'t be empty!</string>
+
+    <string name="date_format">DD/MM/YYYY</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
