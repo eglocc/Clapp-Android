@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="event_types">
+        <item>@string/conference</item>
+        <item>@string/meeting</item>
+        <item>@string/competition</item>
+        <item>@string/party</item>
+        <item>@string/workshop</item>
+        <item>@string/trip</item>
+        <item>@string/nightout</item>
+        <item>@string/training</item>
+    </string-array>
+
+</resources>
