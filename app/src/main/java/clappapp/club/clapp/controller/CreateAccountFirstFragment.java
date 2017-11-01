@@ -1,46 +1,65 @@
 package clappapp.club.clapp.controller;
 
 
-import android.app.FragmentTransaction;
-import android.content.Intent;
+import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 
 import clappapp.club.clapp.R;
+import clappapp.club.clapp.databinding.FragmentCreateAccountFirstBinding;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class CreateAccountFirstFragment extends Fragment {
+
+    interface onArrowClickListener {
+        void next(String email, String name, String surname);
+    }
+
     TextInputEditText email;
     TextInputEditText name;
     TextInputEditText surname;
     ImageView forwardButton;
 
+    private FragmentCreateAccountFirstBinding mBinding;
+    private onArrowClickListener mCallback;
+
+
     public CreateAccountFirstFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mCallback = (onArrowClickListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + "must implement onArrowClickListener.");
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_create_account_first, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_create_account_first, container, false);
+        return mBinding.getRoot();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        email = (TextInputEditText) getActivity().findViewById(R.id.clapper_email_input);
-        name = (TextInputEditText) getActivity().findViewById(R.id.clapper_name_input);
-        surname = (TextInputEditText) getActivity().findViewById(R.id.clapper_surname_input);
-        forwardButton = (ImageView) getActivity().findViewById(R.id.next_page_button);
+        email = mBinding.clapperEmailInput;
+        name = mBinding.clapperNameInput;
+        surname = mBinding.clapperSurnameInput;
+        forwardButton = mBinding.nextPageButton;
         forwardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,12 +94,8 @@ public class CreateAccountFirstFragment extends Fragment {
                 }
 
                 if (!error) {
-                    ((CreateAccount) getActivity()).setFirstThree(tEmail, tName, tSurname);
-                    android.support.v4.app.FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                    Fragment frag = new CreateAccountSecondFragment();
-                    ft.replace(R.id.create_account_frame, frag);
-                    ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-                    ft.commit();
+                    mCallback.next(tEmail, tName, tSurname);
+
                 }
             }
         });

@@ -1,19 +1,14 @@
 package clappapp.club.clapp.controller;
 
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.View;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 
 import clappapp.club.clapp.R;
 import clappapp.club.clapp.model.Enums;
 
-public class CreateAccount extends AppCompatActivity {
+public class CreateAccount extends AppCompatActivity implements CreateAccountFirstFragment.onArrowClickListener {
 
     private String mEmail;
     private String mName;
@@ -38,9 +33,13 @@ public class CreateAccount extends AppCompatActivity {
         ft.commit();
     }
 
-    public void setFirstThree(String email, String name, String surname) {
-        mEmail = email;
-        mName = name;
-        mSurname = surname;
+    @Override
+    public void next(String email, String name, String surname) {
+        Fragment frag = new CreateAccountSecondFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.create_account_frame, frag);
+        ft.addToBackStack(null);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        ft.commit();
     }
 }
