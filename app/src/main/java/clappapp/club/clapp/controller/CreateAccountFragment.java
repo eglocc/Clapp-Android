@@ -7,7 +7,6 @@ import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,7 @@ import android.widget.RadioGroup;
 
 import clappapp.club.clapp.R;
 import clappapp.club.clapp.databinding.FragmentCreateAccountFirstBinding;
+import clappapp.club.clapp.databinding.FragmentCreateAccountSecondBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -64,34 +64,22 @@ public class CreateAccountFragment extends Fragment {
         mBinding = DataBindingUtil.inflate(inflater, mLayoutResourceId, container, false);
         switch (mLayoutResourceId) {
             case R.layout.fragment_create_account_first:
-                email = ((FragmentCreateAccountFirstBinding) mBinding).clapperEmailInput;
-                name = ((FragmentCreateAccountFirstBinding) mBinding).clapperNameInput;
-                surname = ((FragmentCreateAccountFirstBinding) mBinding).clapperSurnameInput;
-                forwardButton = ((FragmentCreateAccountFirstBinding) mBinding).nextPageButton;
+                initFirstFragment();
                 break;
             case R.layout.fragment_create_account_second:
-                Log.d("as", "s");
+                initSecondFragment();
                 break;
         }
 
         return mBinding.getRoot();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        switch (mLayoutResourceId) {
-            case R.layout.fragment_create_account_first:
-                initFirstFragment();
-                break;
-            case R.layout.fragment_create_account_second:
-                //initSecondFragment();
-                break;
-        }
-
-    }
-
     private void initFirstFragment() {
+
+        email = ((FragmentCreateAccountFirstBinding) mBinding).clapperEmail;
+        name = ((FragmentCreateAccountFirstBinding) mBinding).clapperName;
+        surname = ((FragmentCreateAccountFirstBinding) mBinding).clapperSurname;
+        forwardButton = ((FragmentCreateAccountFirstBinding) mBinding).nextPageButton;
 
         forwardButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,10 +124,10 @@ public class CreateAccountFragment extends Fragment {
 
     private void initSecondFragment() {
 
-        /*mPassword = mBinding.clapperPasswordInput;
-        mConfirmPassword = mBinding.clapperPasswordConfirmInput;
-        mDoBPicker = mBinding.clapperDobPicker;
-        mGenderRadioGroup = mBinding.clapperGenderRadioGroup;*/
+        mPassword = ((FragmentCreateAccountSecondBinding) mBinding).clapperPassword;
+        mConfirmPassword = ((FragmentCreateAccountSecondBinding) mBinding).clapperPasswordConfirm;
+        mDoBPicker = ((FragmentCreateAccountSecondBinding) mBinding).clapperDobPicker;
+        mGenderRadioGroup = ((FragmentCreateAccountSecondBinding) mBinding).clapperGenderRadioGroup;
 
         mDoBPicker.setOnClickListener(new View.OnClickListener() {
             @Override
