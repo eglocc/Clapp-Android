@@ -3,13 +3,17 @@ package clappapp.club.clapp.controller;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 
 import clappapp.club.clapp.R;
 import clappapp.club.clapp.databinding.FragmentCreateAccountFirstBinding;
@@ -17,22 +21,30 @@ import clappapp.club.clapp.databinding.FragmentCreateAccountFirstBinding;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CreateAccountFirstFragment extends Fragment {
+public class CreateAccountFragment extends Fragment {
 
     interface onArrowClickListener {
         void next(String email, String name, String surname);
     }
 
-    TextInputEditText email;
-    TextInputEditText name;
-    TextInputEditText surname;
-    ImageView forwardButton;
+    //first fragment views
+    private TextInputEditText email;
+    private TextInputEditText name;
+    private TextInputEditText surname;
+    private ImageView forwardButton;
 
-    private FragmentCreateAccountFirstBinding mBinding;
+    //second fragment views
+    private TextInputEditText mPassword;
+    private TextInputEditText mConfirmPassword;
+    private EditText mDoBPicker;
+    private RadioGroup mGenderRadioGroup;
+
+    private int mLayoutResourceId;
+    private ViewDataBinding mBinding;
     private onArrowClickListener mCallback;
 
 
-    public CreateAccountFirstFragment() {
+    public CreateAccountFragment() {
         // Required empty public constructor
     }
 
@@ -49,17 +61,38 @@ public class CreateAccountFirstFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_create_account_first, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, mLayoutResourceId, container, false);
+        switch (mLayoutResourceId) {
+            case R.layout.fragment_create_account_first:
+                email = ((FragmentCreateAccountFirstBinding) mBinding).clapperEmailInput;
+                name = ((FragmentCreateAccountFirstBinding) mBinding).clapperNameInput;
+                surname = ((FragmentCreateAccountFirstBinding) mBinding).clapperSurnameInput;
+                forwardButton = ((FragmentCreateAccountFirstBinding) mBinding).nextPageButton;
+                break;
+            case R.layout.fragment_create_account_second:
+                Log.d("as", "s");
+                break;
+        }
+
         return mBinding.getRoot();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        email = mBinding.clapperEmailInput;
-        name = mBinding.clapperNameInput;
-        surname = mBinding.clapperSurnameInput;
-        forwardButton = mBinding.nextPageButton;
+        switch (mLayoutResourceId) {
+            case R.layout.fragment_create_account_first:
+                initFirstFragment();
+                break;
+            case R.layout.fragment_create_account_second:
+                //initSecondFragment();
+                break;
+        }
+
+    }
+
+    private void initFirstFragment() {
+
         forwardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,5 +132,25 @@ public class CreateAccountFirstFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void initSecondFragment() {
+
+        /*mPassword = mBinding.clapperPasswordInput;
+        mConfirmPassword = mBinding.clapperPasswordConfirmInput;
+        mDoBPicker = mBinding.clapperDobPicker;
+        mGenderRadioGroup = mBinding.clapperGenderRadioGroup;*/
+
+        mDoBPicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+    }
+
+
+    public void setLayoutResourceId(int id) {
+        this.mLayoutResourceId = id;
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="clappapp.club.clapp.controller.CreateAccount"
+    tools:context="clappapp.club.clapp.controller.CreateAccountActivity"
     android:padding="16sp">
 
     <TextView
