@@ -1,10 +1,11 @@
 package clappapp.club.clapp.controller;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import clappapp.club.clapp.R;
+import clappapp.club.clapp.databinding.ActivityCreateAccountBinding;
 import clappapp.club.clapp.model.Enums;
 
 public class CreateAccountActivity extends AppCompatActivity implements CreateAccountFragment.onArrowClickListener {
@@ -16,31 +17,29 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
     private Long mDateOfBirth;
     private Enums.Gender mGender;
 
+    private ActivityCreateAccountBinding mBinding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_account);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_create_account);
+        mBinding.createAccountPager.setAdapter(new CreateAccountPagerAdapter(getSupportFragmentManager()));
         getSupportActionBar().hide();
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        CreateAccountFragment first = new CreateAccountFragment();
-        first.setLayoutResourceId(R.layout.fragment_create_account_first);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.create_account_frame, first);
-        ft.commit();
+    public void next(String email, String name, String surname) {
+        int currentItem = mBinding.createAccountPager.getCurrentItem();
+        mBinding.createAccountPager.setCurrentItem(currentItem + 1);
     }
 
     @Override
-    public void next(String email, String name, String surname) {
-        CreateAccountFragment second = new CreateAccountFragment();
-        second.setLayoutResourceId(R.layout.fragment_create_account_second);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.create_account_frame, second);
-        ft.addToBackStack(null);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        ft.commit();
+    public void onBackPressed() {
+        int currentItem = mBinding.createAccountPager.getCurrentItem();
+        if (currentItem == 0) {
+            super.onBackPressed();
+        } else {
+            mBinding.createAccountPager.setCurrentItem(currentItem - 1);
+        }
     }
 }

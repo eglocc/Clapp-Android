@@ -32,7 +32,8 @@ public class CreateEventActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.create_event_next_step:
-                mBinding.viewPager.setCurrentItem(mBinding.viewPager.getCurrentItem() + 1);
+                int currentItem = mBinding.viewPager.getCurrentItem();
+                mBinding.viewPager.setCurrentItem(currentItem + 1);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -42,10 +43,10 @@ public class CreateEventActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         int currentItem = mBinding.viewPager.getCurrentItem();
-        if (currentItem > 0) {
-            mBinding.viewPager.setCurrentItem(currentItem - 1);
-        } else {
+        if (currentItem == 0) {
             super.onBackPressed();
+        } else {
+            mBinding.viewPager.setCurrentItem(currentItem - 1);
         }
     }
 

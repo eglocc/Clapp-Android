@@ -48,14 +48,13 @@
 
             <Spinner
                 android:id="@+id/event_type_spinner"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:entries="@array/event_types"
                 android:filterTouchesWhenObscured="false"
                 android:prompt="@string/event_type_prompt"
                 android:spinnerMode="dialog"
                 app:layout_constraintBottom_toTopOf="@+id/event_date_input_layout"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/event_title_input_layout" />
 
