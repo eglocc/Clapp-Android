@@ -1,27 +1,22 @@
 package clappapp.club.clapp.controller;
 
-import android.app.DatePickerDialog;
+
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 
-import java.util.Date;
-
 import clappapp.club.clapp.R;
 import clappapp.club.clapp.databinding.FragmentCreateAccountFirstBinding;
 import clappapp.club.clapp.databinding.FragmentCreateAccountSecondBinding;
-import clappapp.club.clapp.model.DataTypeCheck;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -50,8 +45,8 @@ public class CreateAccountFragment extends Fragment {
 
 
     public CreateAccountFragment() {
+        // Required empty public constructor
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -69,24 +64,6 @@ public class CreateAccountFragment extends Fragment {
         mBinding = DataBindingUtil.inflate(inflater, mLayoutResourceId, container, false);
         switch (mLayoutResourceId) {
             case R.layout.fragment_create_account_first:
-                email = ((FragmentCreateAccountFirstBinding) mBinding).clapperEmailInput;
-                name = ((FragmentCreateAccountFirstBinding) mBinding).clapperNameInput;
-                surname = ((FragmentCreateAccountFirstBinding) mBinding).clapperSurnameInput;
-                forwardButton = ((FragmentCreateAccountFirstBinding) mBinding).nextPageButton;
-                break;
-            case R.layout.fragment_create_account_second:
-                Log.d("as", "s");
-                break;
-        }
-
-        return mBinding.getRoot();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        switch (mLayoutResourceId) {
-            case R.layout.fragment_create_account_first:
                 initFirstFragment();
                 break;
             case R.layout.fragment_create_account_second:
@@ -94,9 +71,15 @@ public class CreateAccountFragment extends Fragment {
                 break;
         }
 
+        return mBinding.getRoot();
     }
 
     private void initFirstFragment() {
+
+        email = ((FragmentCreateAccountFirstBinding) mBinding).clapperEmail;
+        name = ((FragmentCreateAccountFirstBinding) mBinding).clapperName;
+        surname = ((FragmentCreateAccountFirstBinding) mBinding).clapperSurname;
+        forwardButton = ((FragmentCreateAccountFirstBinding) mBinding).nextPageButton;
 
         forwardButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,23 +90,27 @@ public class CreateAccountFragment extends Fragment {
                 String tName = name.getText().toString();
                 String tSurname = surname.getText().toString();
 
-                int emailCheck = DataTypeCheck.checkEmail(tEmail);
-                int nameCheck = DataTypeCheck.checkName(tName);
-                int surnameCheck = DataTypeCheck.checkSurname(tSurname);
-
-
-                if (emailCheck != 1) {
-                    email.setError(getResources().getString(emailCheck));
+                if (tEmail.equals("")) {
+                    email.setError(getResources().getString(R.string.no_email_error));
+                    error = true;
+                } else if (!tEmail.contains("@ku.edu.tr")) {
+                    email.setError(getResources().getString(R.string.email_not_valid_error));
                     error = true;
                 }
 
-                if (nameCheck != 1) {
-                    name.setError(getResources().getString(nameCheck));
+                if (name.getText().toString().equals("")) {
+                    name.setError(getResources().getString(R.string.no_name_error));
+                    error = true;
+                } else if (name.length() < 2) {
+                    name.setError(getResources().getString(R.string.name_too_short_error));
                     error = true;
                 }
 
-                if (surnameCheck != 1) {
-                    surname.setError(getResources().getString(surnameCheck));
+                if (surname.getText().toString().equals("")) {
+                    surname.setError(getResources().getString(R.string.no_surname_error));
+                    error = true;
+                } else if (surname.length() < 2) {
+                    surname.setError(getResources().getString(R.string.surname_too_short_error));
                     error = true;
                 }
 
@@ -137,19 +124,8 @@ public class CreateAccountFragment extends Fragment {
 
     private void initSecondFragment() {
 
-        Date currentDate = new Date(System.currentTimeMillis());
-
-        DatePickerDialog DobPicker = new DatePickerDialog(getActivity().getBaseContext(),
-                new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
-                    }
-                }, currentDate.getYear(), currentDate.getMonth()
-                , currentDate.getDay());
-
-        mPassword = ((FragmentCreateAccountSecondBinding) mBinding).clapperPasswordInput;
-        mConfirmPassword = ((FragmentCreateAccountSecondBinding) mBinding).clapperPasswordConfirmInput;
+        mPassword = ((FragmentCreateAccountSecondBinding) mBinding).clapperPassword;
+        mConfirmPassword = ((FragmentCreateAccountSecondBinding) mBinding).clapperPasswordConfirm;
         mDoBPicker = ((FragmentCreateAccountSecondBinding) mBinding).clapperDobPicker;
         mGenderRadioGroup = ((FragmentCreateAccountSecondBinding) mBinding).clapperGenderRadioGroup;
 
