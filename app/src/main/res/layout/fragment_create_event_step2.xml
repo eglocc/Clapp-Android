@@ -8,13 +8,10 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingEnd="@dimen/default_horizontal_margin"
-            android:paddingLeft="@dimen/default_horizontal_margin"
-            android:paddingRight="@dimen/default_horizontal_margin"
-            android:paddingStart="@dimen/default_horizontal_margin">
+            android:layout_height="wrap_content">
 
             <CheckBox
+                android:id="@+id/chat_check_box"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/generate_chat"

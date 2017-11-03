@@ -8,7 +8,7 @@ import clappapp.club.clapp.R;
 import clappapp.club.clapp.databinding.ActivityCreateAccountBinding;
 import clappapp.club.clapp.model.Enums;
 
-public class CreateAccountActivity extends AppCompatActivity implements CreateAccountFragment.onArrowClickListener {
+public class CreateAccountActivity extends AppCompatActivity implements CreateAccountFragment.Callbacks {
 
     private String mEmail;
     private String mName;
@@ -18,28 +18,30 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
     private Enums.Gender mGender;
 
     private ActivityCreateAccountBinding mBinding;
+    private NonSwipeableViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_create_account);
-        mBinding.createAccountPager.setAdapter(new CreateAccountPagerAdapter(getSupportFragmentManager()));
+        mViewPager = mBinding.createAccountPager;
+        mViewPager.setAdapter(new CreateAccountPagerAdapter(getSupportFragmentManager()));
         getSupportActionBar().hide();
     }
 
     @Override
     public void next(String email, String name, String surname) {
-        int currentItem = mBinding.createAccountPager.getCurrentItem();
-        mBinding.createAccountPager.setCurrentItem(currentItem + 1);
+        int currentItem = mViewPager.getCurrentItem();
+        mViewPager.setCurrentItem(currentItem + 1);
     }
 
     @Override
     public void onBackPressed() {
-        int currentItem = mBinding.createAccountPager.getCurrentItem();
+        int currentItem = mViewPager.getCurrentItem();
         if (currentItem == 0) {
             super.onBackPressed();
         } else {
-            mBinding.createAccountPager.setCurrentItem(currentItem - 1);
+            mViewPager.setCurrentItem(currentItem - 1);
         }
     }
 }

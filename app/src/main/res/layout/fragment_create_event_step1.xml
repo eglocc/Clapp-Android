@@ -1,43 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingEnd="@dimen/default_horizontal_margin"
-            android:paddingLeft="@dimen/default_horizontal_margin"
-            android:paddingRight="@dimen/default_horizontal_margin"
-            android:paddingStart="@dimen/default_horizontal_margin">
-
-            <ImageView
-                android:id="@+id/event_image"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:padding="32dp"
-                android:src="@drawable/plus_box_outline"
-                app:layout_constraintBottom_toTopOf="@+id/event_title_input_layout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="wrap_content">
 
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/event_title_input_layout"
+                android:id="@+id/event_title_input"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@+id/event_type_spinner"
+                app:layout_constraintBottom_toTopOf="@+id/event_date_input"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/event_image">
+                app:layout_constraintTop_toTopOf="parent">
 
-                <EditText
-                    android:id="@+id/event_title_input"
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/event_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/event_title"
@@ -48,81 +34,140 @@
 
             <Spinner
                 android:id="@+id/event_type_spinner"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:entries="@array/event_types"
                 android:filterTouchesWhenObscured="false"
+                android:paddingBottom="@dimen/default_vertical_margin"
+                android:paddingTop="@dimen/default_vertical_margin"
                 android:prompt="@string/event_type_prompt"
                 android:spinnerMode="dialog"
-                app:layout_constraintBottom_toTopOf="@+id/event_date_input_layout"
+                app:layout_constraintBottom_toBottomOf="@id/event_time_input"
+                app:layout_constraintEnd_toStartOf="@id/event_date_input"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/event_title_input_layout" />
+                app:layout_constraintTop_toTopOf="@id/event_date_input" />
 
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/event_date_input_layout"
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/event_date_input"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingEnd="8dp"
-                android:paddingRight="8dp"
-                android:paddingStart="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/event_place_input_layout"
-                app:layout_constraintEnd_toStartOf="@+id/event_time_input_layout"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/event_type_spinner">
+                app:layout_constraintBottom_toTopOf="@+id/event_time_input"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/event_type_spinner"
+                app:layout_constraintTop_toBottomOf="@id/event_title_input">
 
                 <EditText
-                    android:id="@+id/event_date_input"
-                    android:layout_width="match_parent"
+                    android:id="@+id/event_date"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/calendar_blank"
-                    android:drawableRight="@drawable/calendar_blank"
                     android:inputType="date"
                     android:singleLine="true"
-                    tools:hint="@tools:sample/date/ddmmyy" />
+                    tools:hint="@tools:sample/date/ddmmyy"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/event_date_button" />
 
-            </android.support.design.widget.TextInputLayout>
+                <ImageView
+                    android:id="@+id/event_date_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/calendar_blank"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/event_date"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:clickable="true"
+                    android:focusable="true" />
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/event_time_input_layout"
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/event_time_input"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingLeft="8dp"
-                android:paddingStart="8dp"
-                app:layout_constraintBottom_toBottomOf="@id/event_date_input_layout"
+                app:layout_constraintBottom_toTopOf="@+id/event_place_layout"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/event_date_input_layout"
-                app:layout_constraintTop_toTopOf="@id/event_date_input_layout">
+                app:layout_constraintStart_toStartOf="@id/event_date_input"
+                app:layout_constraintTop_toBottomOf="@id/event_date_input">
 
                 <EditText
-                    android:id="@+id/event_time_input"
-                    android:layout_width="match_parent"
+                    android:id="@+id/event_time"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/clock"
-                    android:drawableRight="@drawable/clock"
-                    android:inputType="time"
+                    android:inputType="date"
                     android:singleLine="true"
-                    tools:hint="@tools:sample/date/hhmm" />
+                    tools:hint="@tools:sample/date/ddmmyy"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/event_time_button" />
 
-            </android.support.design.widget.TextInputLayout>
+                <ImageView
+                    android:id="@+id/event_time_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/clock"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/event_time"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:clickable="true" />
+
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/event_place_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/event_description_input"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/event_time_input">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/event_place_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/event_place_button">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/event_place"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/event_place"
+                        android:singleLine="true" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <ImageView
+                    android:id="@+id/event_place_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/map_marker"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/event_place_input"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+            </android.support.constraint.ConstraintLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/event_place_input_layout"
+                android:id="@+id/event_description_input"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/event_date_input_layout">
+                app:layout_constraintTop_toBottomOf="@id/event_place_layout">
 
-                <EditText
-                    android:id="@+id/event_place_input"
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/event_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableEnd="@drawable/map_marker"
-                    android:drawableRight="@drawable/map_marker"
-                    android:hint="@string/event_place"
-                    android:singleLine="true" />
+                    android:gravity="top"
+                    android:hint="@string/event_description"
+                    android:lines="3" />
 
             </android.support.design.widget.TextInputLayout>
 
