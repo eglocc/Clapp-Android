@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "965005290112",
+    "firebase_url": "https://clapp-a1db1.firebaseio.com",
+    "project_id": "clapp-a1db1",
+    "storage_bucket": "clapp-a1db1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:965005290112:android:1a54e6d36bbb9e42",
+        "android_client_info": {
+          "package_name": "clappapp.club.clapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "965005290112-uoe58evd0m3daheer8cp8g62t440blg8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "clappapp.club.clapp",
+            "certificate_hash": "2c3af5698fca92264353bf259dbade2779638545"
+          }
+        },
+        {
+          "client_id": "965005290112-v5pstl62gbqso76k9i3v25iklvar50ah.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "clappapp.club.clapp",
+            "certificate_hash": "a79a28a7963543b9b3f292a67cba59bc72a471c0"
+          }
+        },
+        {
+          "client_id": "965005290112-vbik44logsk3minfmkkqtj2sf81j63m2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUhJ3RR3Q0QpTcnNsVBdPJ4XB1GTVp0lQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "965005290112-vbik44logsk3minfmkkqtj2sf81j63m2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
