@@ -4,23 +4,39 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
-import android.view.MenuItem;
+
+import com.rakshakhegde.stepperindicator.StepperIndicator;
 
 import clappapp.club.clapp.R;
 import clappapp.club.clapp.databinding.ActivityCreateEventBinding;
+import clappapp.club.clapp.model.Enums;
+import clappapp.club.clapp.model.Event;
 
-public class CreateEventActivity extends AppCompatActivity {
+public class CreateEventActivity extends AppCompatActivity implements CreateEventFragment.Callbacks {
+
+    private static final String TAG = CreateEventActivity.class.getSimpleName();
 
     ActivityCreateEventBinding mBinding;
+    private NonSwipeableViewPager mViewPager;
+    private StepperIndicator mStepper;
+    private Event mEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_create_event);
+
         mBinding.viewPager.setAdapter(new CreateEventPagerAdapter(getSupportFragmentManager()));
         mBinding.tabLayout.post(() -> mBinding.tabLayout.setupWithViewPager(mBinding.viewPager));
-    }
+      
+        mViewPager = mBinding.createEventPager;
+        mStepper = mBinding.stepper;
+        mViewPager.setAdapter(new CreateEventPagerAdapter(getSupportFragmentManager()));
+        mStepper.setViewPager(mViewPager);
+        mStepper.showStepNumberInstead(true);
+        mEvent = new Event();
 
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -30,25 +46,34 @@ public class CreateEventActivity extends AppCompatActivity {
 
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.create_event_next_step:
-                int currentItem = mBinding.viewPager.getCurrentItem();
-                mBinding.viewPager.setCurrentItem(currentItem + 1);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+    public void onBackPressed() {
+        int currentItem = mViewPager.getCurrentItem();
+        if (currentItem == 0) {
+            super.onBackPressed();
+        } else {
+            mViewPager.setCurrentItem(currentItem - 1);
         }
     }
 
     @Override
-    public void onBackPressed() {
-        int currentItem = mBinding.viewPager.getCurrentItem();
-        if (currentItem == 0) {
-            super.onBackPressed();
-        } else {
-            mBinding.viewPager.setCurrentItem(currentItem - 1);
-        }
+    public boolean firstStepToSecondStep(String title, String type, long dateTime, String place, String description) {
+        mEvent.setmTitle(title);
+        mEvent.setmType(Enums.EventType.valueOf(type.toUpperCase()));
+        mEvent.setmDescription(description);
+        mEvent.setmDateTime(dateTime);
+        mEvent.setmPlace(place);
+
+        nextPage(mViewPager.getCurrentItem());
+        return true;
     }
 
+    @Override
+    public boolean secondStepToLastStep() {
+        nextPage(mViewPager.getCurrentItem());
+        return true;
+    }
+
+    private void nextPage(int currentPosition) {
+        mViewPager.setCurrentItem(currentPosition + 1);
+    }
 }

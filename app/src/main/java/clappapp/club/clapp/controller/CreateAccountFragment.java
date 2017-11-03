@@ -1,6 +1,7 @@
 package clappapp.club.clapp.controller;
 
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
@@ -10,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
@@ -21,9 +23,9 @@ import clappapp.club.clapp.databinding.FragmentCreateAccountSecondBinding;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CreateAccountFragment extends Fragment {
+public class CreateAccountFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
 
-    interface onArrowClickListener {
+    interface Callbacks {
         void next(String email, String name, String surname);
     }
 
@@ -41,20 +43,23 @@ public class CreateAccountFragment extends Fragment {
 
     private int mLayoutResourceId;
     private ViewDataBinding mBinding;
-    private onArrowClickListener mCallback;
-
+    private Callbacks mCallback;
 
     public CreateAccountFragment() {
         // Required empty public constructor
+    }
+
+    public void setLayoutResourceId(int id) {
+        this.mLayoutResourceId = id;
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            mCallback = (onArrowClickListener) context;
+            mCallback = (Callbacks) context;
         } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + "must implement onArrowClickListener.");
+            throw new ClassCastException(context.toString() + "must implement Callbacks.");
         }
     }
 
@@ -136,8 +141,8 @@ public class CreateAccountFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
 
-    public void setLayoutResourceId(int id) {
-        this.mLayoutResourceId = id;
     }
 }

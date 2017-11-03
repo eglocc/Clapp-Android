@@ -17,11 +17,13 @@ public class CreateEventPagerAdapter extends FragmentStatePagerAdapter {
         CreateEventFragment fragment = new CreateEventFragment();
         switch (position) {
             case 0:
-                fragment.setLayout(R.layout.fragment_create_event_step1);
+                fragment.setLayoutResourceId(R.layout.fragment_create_event_step1);
                 break;
             case 1:
+                fragment.setLayoutResourceId(R.layout.fragment_create_event_step2);
+                break;
             case 2:
-                fragment.setLayout(R.layout.fragment_create_event_step2);
+                fragment.setLayoutResourceId(R.layout.fragment_create_event_add_image);
                 break;
             default:
                 return null;

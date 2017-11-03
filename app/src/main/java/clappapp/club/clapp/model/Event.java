@@ -3,34 +3,34 @@ package clappapp.club.clapp.model;
 import java.util.ArrayList;
 
 public class Event {
+
     public Event() {
     }
 
-
-    private Long mID;
+    private long mID;
     private Enums.EventType mType;
     private String mTitle;
     private String mDescription;
-    private Long mDateTime;
+    private long mDateTime;
     private String mPlace;
     private String mMapLink;
     private ArrayList<String> mMapList;
     private ArrayList<Long> mClappers;
     private String mImageLink;
-    private Long mClub;
-    private Long mCreator;
-    private Long mCreateDateTime;
+    private long mClub;
+    private long mCreator;
+    private long mCreateDateTime;
     private boolean mPassed;
 
     private Enums.Privacy mPrivacy;
-    private Long mChatroom;
+    private long mChatroom;
     private ArrayList<Long> mContacts;
 
-    public Long getmID() {
+    public long getmID() {
         return mID;
     }
 
-    public void setmID(Long mID) {
+    public void setmID(long mID) {
         this.mID = mID;
     }
 
@@ -58,11 +58,11 @@ public class Event {
         this.mDescription = mDescription;
     }
 
-    public Long getmDateTime() {
+    public long getmDateTime() {
         return mDateTime;
     }
 
-    public void setmDateTime(Long mDateTime) {
+    public void setmDateTime(long mDateTime) {
         this.mDateTime = mDateTime;
     }
 
@@ -106,27 +106,27 @@ public class Event {
         this.mImageLink = mImageLink;
     }
 
-    public Long getmClub() {
+    public long getmClub() {
         return mClub;
     }
 
-    public void setmClub(Long mClub) {
+    public void setmClub(long mClub) {
         this.mClub = mClub;
     }
 
-    public Long getmCreator() {
+    public long getmCreator() {
         return mCreator;
     }
 
-    public void setmCreator(Long mCreator) {
+    public void setmCreator(long mCreator) {
         this.mCreator = mCreator;
     }
 
-    public Long getmCreateDateTime() {
+    public long getmCreateDateTime() {
         return mCreateDateTime;
     }
 
-    public void setmCreateDateTime(Long mCreateDateTime) {
+    public void setmCreateDateTime(long mCreateDateTime) {
         this.mCreateDateTime = mCreateDateTime;
     }
 
@@ -146,11 +146,11 @@ public class Event {
         this.mPrivacy = mPrivacy;
     }
 
-    public Long getmChatroom() {
+    public long getmChatroom() {
         return mChatroom;
     }
 
-    public void setmChatroom(Long mChatroom) {
+    public void setmChatroom(long mChatroom) {
         this.mChatroom = mChatroom;
     }
 
