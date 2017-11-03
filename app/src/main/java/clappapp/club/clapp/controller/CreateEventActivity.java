@@ -25,12 +25,17 @@ public class CreateEventActivity extends AppCompatActivity implements CreateEven
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_create_event);
+
+        mBinding.viewPager.setAdapter(new CreateEventPagerAdapter(getSupportFragmentManager()));
+        mBinding.tabLayout.post(() -> mBinding.tabLayout.setupWithViewPager(mBinding.viewPager));
+      
         mViewPager = mBinding.createEventPager;
         mStepper = mBinding.stepper;
         mViewPager.setAdapter(new CreateEventPagerAdapter(getSupportFragmentManager()));
         mStepper.setViewPager(mViewPager);
         mStepper.showStepNumberInstead(true);
         mEvent = new Event();
+
     }
 
     @Override
@@ -38,6 +43,7 @@ public class CreateEventActivity extends AppCompatActivity implements CreateEven
         getMenuInflater().inflate(R.menu.menu_create_event, menu);
         return true;
     }
+
 
     @Override
     public void onBackPressed() {

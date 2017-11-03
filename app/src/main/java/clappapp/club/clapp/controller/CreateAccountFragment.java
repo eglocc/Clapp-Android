@@ -133,7 +133,6 @@ public class CreateAccountFragment extends Fragment implements DatePickerDialog.
         mConfirmPassword = ((FragmentCreateAccountSecondBinding) mBinding).clapperPasswordConfirm;
         mDoBPicker = ((FragmentCreateAccountSecondBinding) mBinding).clapperDobPicker;
         mGenderRadioGroup = ((FragmentCreateAccountSecondBinding) mBinding).clapperGenderRadioGroup;
-
         mDoBPicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

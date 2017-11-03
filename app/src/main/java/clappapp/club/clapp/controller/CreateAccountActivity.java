@@ -27,6 +27,7 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
         mViewPager = mBinding.createAccountPager;
         mViewPager.setAdapter(new CreateAccountPagerAdapter(getSupportFragmentManager()));
         getSupportActionBar().hide();
+
     }
 
     @Override
