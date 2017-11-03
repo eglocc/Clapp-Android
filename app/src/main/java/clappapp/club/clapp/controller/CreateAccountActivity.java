@@ -21,6 +21,7 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
         getSupportActionBar().hide();
+
     }
 
     @Override
