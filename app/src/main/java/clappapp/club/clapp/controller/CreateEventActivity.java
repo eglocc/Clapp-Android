@@ -18,7 +18,7 @@ public class CreateEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_create_event);
         mBinding.viewPager.setAdapter(new CreateEventPagerAdapter(getSupportFragmentManager()));
-        //mBinding.tabLayout.post(() -> mBinding.tabLayout.setupWithViewPager(mBinding.viewPager));
+        mBinding.tabLayout.post(() -> mBinding.tabLayout.setupWithViewPager(mBinding.viewPager));
     }
 
 
@@ -27,6 +27,7 @@ public class CreateEventActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_create_event, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
