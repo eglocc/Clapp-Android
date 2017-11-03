@@ -50,15 +50,24 @@ public class CreateEventActivity extends AppCompatActivity implements CreateEven
     }
 
     @Override
-    public boolean next(String title, String type, long dateTime, String place, String description) {
+    public boolean firstStepToSecondStep(String title, String type, long dateTime, String place, String description) {
         mEvent.setmTitle(title);
         mEvent.setmType(Enums.EventType.valueOf(type.toUpperCase()));
         mEvent.setmDescription(description);
         mEvent.setmDateTime(dateTime);
         mEvent.setmPlace(place);
 
-        int currentItem = mViewPager.getCurrentItem();
-        mViewPager.setCurrentItem(currentItem + 1);
+        nextPage(mViewPager.getCurrentItem());
         return true;
+    }
+
+    @Override
+    public boolean secondStepToLastStep() {
+        nextPage(mViewPager.getCurrentItem());
+        return true;
+    }
+
+    private void nextPage(int currentPosition) {
+        mViewPager.setCurrentItem(currentPosition + 1);
     }
 }

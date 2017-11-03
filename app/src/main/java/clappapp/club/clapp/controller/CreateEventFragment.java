@@ -36,7 +36,9 @@ public class CreateEventFragment extends Fragment implements DatePickerDialog.On
     private static final String TAG = CreateEventFragment.class.getSimpleName();
 
     interface Callbacks {
-        boolean next(String title, String type, long dateTime, String place, String description);
+        boolean firstStepToSecondStep(String title, String type, long dateTime, String place, String description);
+
+        boolean secondStepToLastStep();
     }
 
     private ViewDataBinding mBinding;
@@ -114,11 +116,16 @@ public class CreateEventFragment extends Fragment implements DatePickerDialog.On
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.create_event_next_step:
-                return mCallback.next(mTitleEditText.getText().toString(),
-                        mEventTypeSpinner.getSelectedItem().toString(),
-                        mCalendar.getTimeInMillis(),
-                        mPlaceEditText.getText().toString(),
-                        mDescriptionEditText.getText().toString());
+                switch (mLayoutResourceId) {
+                    case R.layout.fragment_create_event_step1:
+                        return mCallback.firstStepToSecondStep(mTitleEditText.getText().toString(),
+                                mEventTypeSpinner.getSelectedItem().toString(),
+                                mCalendar.getTimeInMillis(),
+                                mPlaceEditText.getText().toString(),
+                                mDescriptionEditText.getText().toString());
+                    case R.layout.fragment_create_event_step2:
+                        return mCallback.secondStepToLastStep();
+                }
             default:
                 return true;
         }
