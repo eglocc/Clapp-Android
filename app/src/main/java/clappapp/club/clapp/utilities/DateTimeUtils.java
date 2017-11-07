@@ -1,4 +1,4 @@
-package clappapp.club.clapp.model;
+package clappapp.club.clapp.utilities;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

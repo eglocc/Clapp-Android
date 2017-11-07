@@ -12,155 +12,171 @@ public class Event {
     private String mTitle;
     private String mDescription;
     private long mDateTime;
+    private String mDateString;
+    private String mTimeString;
     private String mPlace;
     private String mMapLink;
     private ArrayList<String> mMapList;
     private ArrayList<Long> mClappers;
     private String mImageLink;
-    private long mClub;
-    private long mCreator;
+    private long mClubID;
+    private long mCreatorID;
     private long mCreateDateTime;
     private boolean mPassed;
 
     private Enums.Privacy mPrivacy;
-    private long mChatroom;
+    private long mChatroomID;
     private ArrayList<Long> mContacts;
 
-    public long getmID() {
+    public long getID() {
         return mID;
     }
 
-    public void setmID(long mID) {
-        this.mID = mID;
+    public void setID(long ID) {
+        this.mID = ID;
     }
 
-    public Enums.EventType getmType() {
+    public Enums.EventType getType() {
         return mType;
     }
 
-    public void setmType(Enums.EventType mType) {
-        this.mType = mType;
+    public void setType(Enums.EventType type) {
+        this.mType = type;
     }
 
-    public String getmTitle() {
+    public String getTitle() {
         return mTitle;
     }
 
-    public void setmTitle(String mTitle) {
-        this.mTitle = mTitle;
+    public void setTitle(String title) {
+        this.mTitle = title;
     }
 
-    public String getmDescription() {
+    public String getDescription() {
         return mDescription;
     }
 
-    public void setmDescription(String mDescription) {
-        this.mDescription = mDescription;
+    public void setDescription(String description) {
+        this.mDescription = description;
     }
 
-    public long getmDateTime() {
+    public long getDateTime() {
         return mDateTime;
     }
 
-    public void setmDateTime(long mDateTime) {
-        this.mDateTime = mDateTime;
+    public void setDateTime(long dateTime) {
+        this.mDateTime = dateTime;
     }
 
-    public String getmPlace() {
+    public String getPlace() {
         return mPlace;
     }
 
-    public void setmPlace(String mPlace) {
-        this.mPlace = mPlace;
+    public void setPlace(String place) {
+        this.mPlace = place;
     }
 
-    public String getmMapLink() {
+    public String getMapLink() {
         return mMapLink;
     }
 
-    public void setmMapLink(String mMapLink) {
-        this.mMapLink = mMapLink;
+    public void setMapLink(String mapLink) {
+        this.mMapLink = mapLink;
     }
 
-    public ArrayList<String> getmMapList() {
+    public ArrayList<String> getMapList() {
         return mMapList;
     }
 
-    public void setmMapList(ArrayList<String> mMapList) {
-        this.mMapList = mMapList;
+    public void setMapList(ArrayList<String> mapList) {
+        this.mMapList = mapList;
     }
 
-    public ArrayList<Long> getmClappers() {
+    public ArrayList<Long> getClappers() {
         return mClappers;
     }
 
-    public void setmClappers(ArrayList<Long> mClappers) {
-        this.mClappers = mClappers;
+    public void setClappers(ArrayList<Long> clappers) {
+        this.mClappers = clappers;
     }
 
-    public String getmImageLink() {
+    public String getImageLink() {
         return mImageLink;
     }
 
-    public void setmImageLink(String mImageLink) {
-        this.mImageLink = mImageLink;
+    public void setImageLink(String imageLink) {
+        this.mImageLink = imageLink;
     }
 
-    public long getmClub() {
-        return mClub;
+    public long getClub() {
+        return mClubID;
     }
 
-    public void setmClub(long mClub) {
-        this.mClub = mClub;
+    public void setClub(long club) {
+        this.mClubID = club;
     }
 
-    public long getmCreator() {
-        return mCreator;
+    public long getCreator() {
+        return mCreatorID;
     }
 
-    public void setmCreator(long mCreator) {
-        this.mCreator = mCreator;
+    public void setCreator(long creator) {
+        this.mCreatorID = creator;
     }
 
-    public long getmCreateDateTime() {
+    public long getCreateDateTime() {
         return mCreateDateTime;
     }
 
-    public void setmCreateDateTime(long mCreateDateTime) {
-        this.mCreateDateTime = mCreateDateTime;
+    public void setCreateDateTime(long createDateTime) {
+        this.mCreateDateTime = createDateTime;
     }
 
-    public boolean ismPassed() {
+    public boolean isPassed() {
         return mPassed;
     }
 
-    public void setmPassed(boolean mPassed) {
-        this.mPassed = mPassed;
+    public void setPassed(boolean passed) {
+        this.mPassed = passed;
     }
 
-    public Enums.Privacy getmPrivacy() {
+    public Enums.Privacy getPrivacy() {
         return mPrivacy;
     }
 
-    public void setmPrivacy(Enums.Privacy mPrivacy) {
-        this.mPrivacy = mPrivacy;
+    public void setPrivacy(Enums.Privacy privacy) {
+        this.mPrivacy = privacy;
     }
 
-    public long getmChatroom() {
-        return mChatroom;
+    public long getChatroom() {
+        return mChatroomID;
     }
 
-    public void setmChatroom(long mChatroom) {
-        this.mChatroom = mChatroom;
+    public void setChatroom(long chatroom) {
+        this.mChatroomID = chatroom;
     }
 
-    public ArrayList<Long> getmContacts() {
+    public ArrayList<Long> getContacts() {
         return mContacts;
     }
 
-    public void setmContacts(ArrayList<Long> mContacts) {
-        this.mContacts = mContacts;
+    public void setContacts(ArrayList<Long> contacts) {
+        this.mContacts = contacts;
     }
 
+    public String getTimeString() {
+        return mTimeString;
+    }
 
+    public void setTimeString(String timeString) {
+        this.mTimeString = timeString;
+    }
+
+    public String getDateString() {
+        return mDateString;
+    }
+
+    public void setDateString(String dateString) {
+        this.mDateString = dateString;
+    }
 }

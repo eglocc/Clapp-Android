@@ -76,7 +76,7 @@
             android:layout_height="52dp"
             android:layout_marginTop="16dp"
             android:background="#00000000"
-            android:src="@drawable/ic_arrow_forward_black_24px"
+            android:src="@drawable/arrow_right_black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/input_linear_layout"
             app:layout_constraintRight_toRightOf="@id/input_linear_layout"

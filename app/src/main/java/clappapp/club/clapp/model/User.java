@@ -16,107 +16,107 @@ public class User {
     private ArrayList<Long> mFollowingClubs;
     private ArrayList<Long> mFollowingEvents;
     private ArrayList<Long> mClappers;
-    private Long mCreateDateTime;
+    private long mCreateDateTime;
     //Titles
     private ArrayList<Long> mEventsCreated;
     private ArrayList<Long> mEventsAttended;
     //messageBox
 
 
-    public String getmName() {
+    public String getName() {
         return mName;
     }
 
-    public void setmName(String mName) {
-        this.mName = mName;
+    public void setName(String name) {
+        this.mName = name;
     }
 
-    public String getmSurname() {
+    public String getSurname() {
         return mSurname;
     }
 
-    public void setmSurname(String mSurname) {
-        this.mSurname = mSurname;
+    public void setSurname(String surname) {
+        this.mSurname = surname;
     }
 
-    public String getmEmail() {
+    public String getEmail() {
         return mEmail;
     }
 
-    public void setmEmail(String mEmail) {
-        this.mEmail = mEmail;
+    public void setEmail(String email) {
+        this.mEmail = email;
     }
 
-    public long getmID() {
+    public long getID() {
         return mID;
     }
 
-    public void setmID(long mID) {
-        this.mID = mID;
+    public void setID(long ID) {
+        this.mID = ID;
     }
 
-    public long getmDateOfBirth() {
+    public long getDateOfBirth() {
         return mDateOfBirth;
     }
 
-    public void setmDateOfBirth(long mDateOfBirth) {
-        this.mDateOfBirth = mDateOfBirth;
+    public void setDateOfBirth(long dateOfBirth) {
+        this.mDateOfBirth = dateOfBirth;
     }
 
-    public long getmUniversityID() {
+    public long getUniversityID() {
         return mUniversityID;
     }
 
-    public void setmUniversityID(long mUniversityID) {
-        this.mUniversityID = mUniversityID;
+    public void setUniversityID(long universityID) {
+        this.mUniversityID = universityID;
     }
 
-    public ArrayList<Long> getmFollowingClubs() {
+    public ArrayList<Long> getFollowingClubs() {
         return mFollowingClubs;
     }
 
-    public void setmFollowingClubs(ArrayList<Long> mFollowingClubs) {
-        this.mFollowingClubs = mFollowingClubs;
+    public void setFollowingClubs(ArrayList<Long> followingClubs) {
+        this.mFollowingClubs = followingClubs;
     }
 
-    public ArrayList<Long> getmFollowingEvents() {
+    public ArrayList<Long> getFollowingEvents() {
         return mFollowingEvents;
     }
 
-    public void setmFollowingEvents(ArrayList<Long> mFollowingEvents) {
-        this.mFollowingEvents = mFollowingEvents;
+    public void setFollowingEvents(ArrayList<Long> followingEvents) {
+        this.mFollowingEvents = followingEvents;
     }
 
-    public ArrayList<Long> getmClappers() {
+    public ArrayList<Long> getClappers() {
         return mClappers;
     }
 
-    public void setmClappers(ArrayList<Long> mClappers) {
-        this.mClappers = mClappers;
+    public void setClappers(ArrayList<Long> clappers) {
+        this.mClappers = clappers;
     }
 
-    public Long getmCreateDateTime() {
+    public long getCreateDateTime() {
         return mCreateDateTime;
     }
 
-    public void setmCreateDateTime(Long mCreateDateTime) {
-        this.mCreateDateTime = mCreateDateTime;
+    public void setCreateDateTime(long createDateTime) {
+        this.mCreateDateTime = createDateTime;
     }
 
-    public ArrayList<Long> getmEventsCreated() {
+    public ArrayList<Long> getEventsCreated() {
         return mEventsCreated;
     }
 
-    public void setmEventsCreated(ArrayList<Long> mEventsCreated) {
-        this.mEventsCreated = mEventsCreated;
+    public void setEventsCreated(ArrayList<Long> eventsCreated) {
+        this.mEventsCreated = eventsCreated;
     }
 
-    public ArrayList<Long> getmEventsAttended() {
+    public ArrayList<Long> getEventsAttended() {
         return mEventsAttended;
     }
 
-    public void setmEventsAttended(ArrayList<Long> mEventsAttended) {
-        this.mEventsAttended = mEventsAttended;
+    public void setEventsAttended(ArrayList<Long> eventsAttended) {
+        this.mEventsAttended = eventsAttended;
     }
 
 }

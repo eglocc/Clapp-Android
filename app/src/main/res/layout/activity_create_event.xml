@@ -18,7 +18,7 @@
             android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            app:stpi_stepCount="3"
+            app:stpi_stepCount="4"
             app:stpi_circleRadius="16dp" />
 
         <clappapp.club.clapp.controller.NonSwipeableViewPager

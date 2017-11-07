@@ -8,8 +8,11 @@
     <string name="member_number_label">Members: </string>
     <string name="upcoming_events_number_label">Upcoming Events: </string>
     <string name="total_events_number_label">"Total Events: "</string>
+
     <string name="login">LOGIN</string>
     <string name="sign_up">SIGN UP</string>
+    <string name="continue_as_a_guest">CONTINUE AS A GUEST</string>
+
     <string name="name_hint">Name</string>
     <string name="surname_hint">Surname</string>
     <string name="email_hint">Email</string>
@@ -20,11 +23,12 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="other">Keep me fuckin\' away from you norms!</string>
-    <string name="continue_as_a_guest">CONTINUE AS A GUEST</string>
+
     <string name="event_title">Title</string>
-    <string name="event_type_prompt">Choose event type</string>
     <string name="event_description">Description</string>
     <string name="event_place">Place</string>
+
+    <string name="event_type_prompt">Choose event type</string>
     <string name="conference">Conference</string>
     <string name="meeting">Meeting</string>
     <string name="competition">Competition</string>
@@ -33,7 +37,16 @@
     <string name="trip">Trip</string>
     <string name="nightout">Night out</string>
     <string name="training">Training</string>
+
     <string name="next">Next</string>
+    <string name="add_contact_label">Add contact</string>
+    <string name="no_contacts">No contacts!</string>
+    <string name="privacy_prompt">Select privacy</string>
+    <string name="global_privacy">Global</string>
+    <string name="local_privacy">Local</string>
+    <string name="club_privacy">Club</string>
+    <string name="group_privacy">Group</string>
+    <string name="custom_privacy">Custom</string>
     <string name="generate_chat">Generate chat group</string>
 
     <string name="no_name_error">Name field can\'t be empty!</string>
@@ -48,8 +61,6 @@
 
     <string name="date_format">DD/MM/YYYY</string>
 
-
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
 </resources>

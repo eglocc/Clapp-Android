@@ -1,12 +1,8 @@
-package clappapp.club.clapp.model;
+package clappapp.club.clapp.utilities;
 
 import clappapp.club.clapp.R;
 
-/**
- * Created by enver on 2.11.2017.
- */
-
-public class DataTypeCheck {
+public class DataTypeCheckUtils {
 
     private static int MIN_NAME_LENGTH = 3;
     private static int MIN_PASSWORD_LENGTH = 6;
