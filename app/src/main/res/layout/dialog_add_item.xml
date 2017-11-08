@@ -1,23 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/prompt_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/default_vertical_margin"
-        android:paddingRight="@dimen/default_vertical_margin"
-        tools:text="Prompt"
-        android:textSize="@dimen/default_head_size"
-        android:textStyle="bold" />
 
-    <include
-        android:id="@+id/add_element_layout"
-        layout="@layout/add_item_layout" />
 
 </LinearLayout>
 

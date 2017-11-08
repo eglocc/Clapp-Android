@@ -39,7 +39,7 @@
     <string name="training">Training</string>
 
     <string name="next">Next</string>
-    <string name="add_contact_label">Add contact</string>
+    <string name="add_contacts_prompt">Add event coordinators here!</string>
     <string name="no_contacts">No contacts!</string>
     <string name="privacy_prompt">Select privacy</string>
     <string name="global_privacy">Global</string>
@@ -48,6 +48,8 @@
     <string name="group_privacy">Group</string>
     <string name="custom_privacy">Custom</string>
     <string name="generate_chat">Generate chat group</string>
+
+    <string name="add_image_label">Add Image</string>
 
     <string name="no_name_error">Name field can\'t be empty!</string>
     <string name="no_email_error">Email field can\'t be empty!</string>

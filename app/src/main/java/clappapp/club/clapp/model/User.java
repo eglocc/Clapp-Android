@@ -1,10 +1,11 @@
 package clappapp.club.clapp.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class User {
+public class User implements Serializable {
 
-    public User() {
+    private User() {
     }
 
     private String mName;
@@ -13,6 +14,7 @@ public class User {
     private long mID;
     private long mDateOfBirth;
     private long mUniversityID;
+    private String mImageLink;
     private ArrayList<Long> mFollowingClubs;
     private ArrayList<Long> mFollowingEvents;
     private ArrayList<Long> mClappers;
@@ -22,6 +24,14 @@ public class User {
     private ArrayList<Long> mEventsAttended;
     //messageBox
 
+    public User(String name) {
+        mName = name;
+    }
+
+    public User(String name, String email) {
+        mName = name;
+        mEmail = email;
+    }
 
     public String getName() {
         return mName;
@@ -71,6 +81,14 @@ public class User {
         this.mUniversityID = universityID;
     }
 
+    public String getImageLink() {
+        return mImageLink;
+    }
+
+    public void setImageLink(String imageLink) {
+        this.mImageLink = imageLink;
+    }
+
     public ArrayList<Long> getFollowingClubs() {
         return mFollowingClubs;
     }
@@ -118,7 +136,6 @@ public class User {
     public void setEventsAttended(ArrayList<Long> eventsAttended) {
         this.mEventsAttended = eventsAttended;
     }
-
 }
 
 

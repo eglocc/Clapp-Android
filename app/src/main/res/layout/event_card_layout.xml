@@ -9,7 +9,7 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:paddingLeft="@dimen/default_horizontal_margin"
             android:paddingRight="@dimen/default_horizontal_margin"
             android:paddingTop="@dimen/default_vertical_margin">
@@ -55,7 +55,7 @@
                 android:id="@+id/event_picture"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
-                tools:src="@drawable/magnify"
+                android:src="@drawable/magnify"
                 android:layout_marginTop="@dimen/default_vertical_margin"
                 android:layout_marginBottom="@dimen/default_vertical_margin"
                 app:layout_constraintTop_toBottomOf="@id/event_description"
@@ -67,7 +67,7 @@
                 android:id="@+id/footer"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/default_horizontal_margin"
+                android:paddingTop="@dimen/default_vertical_margin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/event_picture"

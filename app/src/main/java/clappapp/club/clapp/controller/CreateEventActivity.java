@@ -82,7 +82,8 @@ public class CreateEventActivity extends AppCompatActivity implements CreateEven
 
     @Override
     public boolean secondStepToLastStep() {
-        nextPage(mViewPager.getCurrentItem());
+        int currentPosition = mViewPager.getCurrentItem();
+        nextPage(currentPosition);
         return true;
     }
 

@@ -6,10 +6,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingEnd="@dimen/default_horizontal_margin"
-        android:paddingLeft="@dimen/default_horizontal_margin"
-        android:paddingRight="@dimen/default_horizontal_margin"
-        android:paddingStart="@dimen/default_horizontal_margin"
         android:paddingTop="@dimen/default_horizontal_margin"
         tools:context=".controller.CreateEventActivity">
 
@@ -24,7 +20,9 @@
         <clappapp.club.clapp.controller.NonSwipeableViewPager
             android:id="@+id/create_event_pager"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_vertical_margin"
+            android:layout_marginBottom="@dimen/default_vertical_margin" />
 
     </LinearLayout>
 
