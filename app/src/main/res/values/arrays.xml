@@ -10,6 +10,16 @@
         <item>@string/trip</item>
         <item>@string/nightout</item>
         <item>@string/training</item>
+        <item>@string/event_type_prompt</item>
+    </string-array>
+
+    <string-array name="privacy_types">
+        <item>@string/global_privacy</item>
+        <item>@string/local_privacy</item>
+        <item>@string/club_privacy</item>
+        <item>@string/group_privacy</item>
+        <item>@string/custom_privacy</item>
+        <item>@string/privacy_prompt</item>
     </string-array>
 
 </resources>

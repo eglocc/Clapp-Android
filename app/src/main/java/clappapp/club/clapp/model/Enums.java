@@ -7,7 +7,12 @@ public class Enums {
         LOCAL,
         CLUB,
         GROUP,
-        PRIVATE
+        PRIVATE;
+
+        @Override
+        public String toString() {
+            return name().charAt(0) + name().substring(1).toLowerCase();
+        }
     }
 
     public enum EventType {
@@ -18,7 +23,12 @@ public class Enums {
         WORKSHOP,
         TRIP,
         NIGHTOUT,
-        TRAINING
+        TRAINING;
+
+        @Override
+        public String toString() {
+            return name().charAt(0) + name().substring(1).toLowerCase();
+        }
     }
 
     public enum Gender {

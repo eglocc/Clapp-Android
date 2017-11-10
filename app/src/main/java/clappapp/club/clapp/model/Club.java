@@ -7,87 +7,87 @@ public class Club {
     }
 
     private String mName;
-    private Long mID;
-    private Long mPresident;
+    private long mID;
+    private long mPresidentID;
     private ArrayList<Long> mMembers;
     private ArrayList<Long> mClappers;
     private ArrayList<Long> mUpcomingEvents;
     private ArrayList<Long> mPassedEvents;
     private ArrayList<Long> mRequestList;
     //xEventClappers Lists
-    private boolean mPublicMemberList;
+    private boolean mMemberListPublic;
 
 
-    public String getmName() {
+    public String getName() {
         return mName;
     }
 
-    public void setmName(String mName) {
-        this.mName = mName;
+    public void setName(String name) {
+        this.mName = name;
     }
 
-    public Long getmID() {
+    public Long getID() {
         return mID;
     }
 
-    public void setmID(Long mID) {
-        this.mID = mID;
+    public void setID(long ID) {
+        this.mID = ID;
     }
 
-    public Long getmPresident() {
-        return mPresident;
+    public long getPresident() {
+        return mPresidentID;
     }
 
-    public void setmPresident(Long mPresident) {
-        this.mPresident = mPresident;
+    public void setPresident(long presidentID) {
+        this.mPresidentID = presidentID;
     }
 
-    public ArrayList<Long> getmMembers() {
+    public ArrayList<Long> getMembers() {
         return mMembers;
     }
 
-    public void setmMembers(ArrayList<Long> mMembers) {
-        this.mMembers = mMembers;
+    public void setMembers(ArrayList<Long> members) {
+        this.mMembers = members;
     }
 
-    public ArrayList<Long> getmClappers() {
+    public ArrayList<Long> getClappers() {
         return mClappers;
     }
 
-    public void setmClappers(ArrayList<Long> mClappers) {
-        this.mClappers = mClappers;
+    public void setClappers(ArrayList<Long> clappers) {
+        this.mClappers = clappers;
     }
 
-    public ArrayList<Long> getmUpcomingEvents() {
+    public ArrayList<Long> getUpcomingEvents() {
         return mUpcomingEvents;
     }
 
-    public void setmUpcomingEvents(ArrayList<Long> mUpcomingEvents) {
-        this.mUpcomingEvents = mUpcomingEvents;
+    public void setUpcomingEvents(ArrayList<Long> upcomingEvents) {
+        this.mUpcomingEvents = upcomingEvents;
     }
 
-    public ArrayList<Long> getmPassedEvents() {
+    public ArrayList<Long> getPassedEvents() {
         return mPassedEvents;
     }
 
-    public void setmPassedEvents(ArrayList<Long> mPassedEvents) {
-        this.mPassedEvents = mPassedEvents;
+    public void setPassedEvents(ArrayList<Long> passedEvents) {
+        this.mPassedEvents = passedEvents;
     }
 
-    public ArrayList<Long> getmRequestList() {
+    public ArrayList<Long> getRequestList() {
         return mRequestList;
     }
 
-    public void setmRequestList(ArrayList<Long> mRequestList) {
-        this.mRequestList = mRequestList;
+    public void setRequestList(ArrayList<Long> requestList) {
+        this.mRequestList = requestList;
     }
 
-    public boolean ismPublicMemberList() {
-        return mPublicMemberList;
+    public boolean isPublicMemberList() {
+        return mMemberListPublic;
     }
 
-    public void setmPublicMemberList(boolean mPublicMemberList) {
-        this.mPublicMemberList = mPublicMemberList;
+    public void setMemberListPublic(boolean memberListPublic) {
+        this.mMemberListPublic = memberListPublic;
     }
 
 

@@ -14,21 +14,20 @@ public class CreateEventPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        CreateEventFragment fragment = new CreateEventFragment();
+        Fragment fragment = null;
         switch (position) {
             case 0:
-                fragment.setLayoutResourceId(R.layout.fragment_create_event_step1);
-                break;
+                fragment = CreateEventFragment.newInstance(R.layout.fragment_create_event_step1);
+                return fragment;
             case 1:
-                fragment.setLayoutResourceId(R.layout.fragment_create_event_step2);
-                break;
+                fragment = CreateEventFragment.newInstance(R.layout.fragment_create_event_step2);
+                return fragment;
             case 2:
-                fragment.setLayoutResourceId(R.layout.fragment_create_event_add_image);
-                break;
+                fragment = CreateEventFragment.newInstance(R.layout.fragment_create_event_step3);
+                return fragment;
             default:
-                return null;
+                return fragment;
         }
-        return fragment;
     }
 
     @Override
