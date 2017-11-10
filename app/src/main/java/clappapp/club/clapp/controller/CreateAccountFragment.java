@@ -6,6 +6,8 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -14,8 +16,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RadioGroup;
+import android.widget.Spinner;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import clappapp.club.clapp.R;
 import clappapp.club.clapp.databinding.FragmentCreateAccountFirstBinding;
@@ -30,17 +36,19 @@ public class CreateAccountFragment extends Fragment implements DatePickerDialog.
         void next(String email, String name, String surname);
     }
 
+    private static final String LAYOUT_TAG = "layoutResourceID";
+
     //first fragment views
     private TextInputEditText email;
     private TextInputEditText name;
     private TextInputEditText surname;
-    private ImageView forwardButton;
+    private FloatingActionButton forwardButton;
 
     //second fragment views
     private TextInputEditText mPassword;
     private TextInputEditText mConfirmPassword;
     private EditText mDoBPicker;
-    private RadioGroup mGenderRadioGroup;
+    private Spinner mGenderSpinner;
 
     private int mLayoutResourceId;
     private ViewDataBinding mBinding;
@@ -50,8 +58,15 @@ public class CreateAccountFragment extends Fragment implements DatePickerDialog.
         // Required empty public constructor
     }
 
-    public void setLayoutResourceId(int id) {
-        this.mLayoutResourceId = id;
+    public static CreateAccountFragment newInstance(int layoutResourceID) {
+
+        Bundle args = new Bundle();
+
+        args.putInt(LAYOUT_TAG, layoutResourceID);
+
+        CreateAccountFragment fragment = new CreateAccountFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
@@ -62,6 +77,12 @@ public class CreateAccountFragment extends Fragment implements DatePickerDialog.
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() + "must implement Callbacks.");
         }
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mLayoutResourceId = getArguments().getInt(LAYOUT_TAG);
     }
 
     @Override
@@ -133,17 +154,21 @@ public class CreateAccountFragment extends Fragment implements DatePickerDialog.
         mPassword = ((FragmentCreateAccountSecondBinding) mBinding).clapperPassword;
         mConfirmPassword = ((FragmentCreateAccountSecondBinding) mBinding).clapperPasswordConfirm;
         mDoBPicker = ((FragmentCreateAccountSecondBinding) mBinding).clapperDobPicker;
-        mGenderRadioGroup = ((FragmentCreateAccountSecondBinding) mBinding).clapperGenderRadioGroup;
+        mGenderSpinner = ((FragmentCreateAccountSecondBinding) mBinding).clapperGenderSpinner;
         mDoBPicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                DatePickerFragment dbfrag = new DatePickerFragment();
+                dbfrag.show(getChildFragmentManager(), DatePickerFragment.TAG);
             }
         });
     }
 
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-
+        Calendar cal = new GregorianCalendar();
+        cal.set(year, month, day);
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        mDoBPicker.setText(dateFormat.format(cal.getTime()));
     }
 }
