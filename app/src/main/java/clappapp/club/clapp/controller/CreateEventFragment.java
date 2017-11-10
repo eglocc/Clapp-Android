@@ -11,13 +11,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatSpinner;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -25,27 +23,32 @@ import android.widget.ImageView;
 import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import clappapp.club.clapp.R;
-import clappapp.club.clapp.databinding.FragmentCreateEventAddImageBinding;
 import clappapp.club.clapp.databinding.FragmentCreateEventStep1Binding;
 import clappapp.club.clapp.databinding.FragmentCreateEventStep2Binding;
+import clappapp.club.clapp.databinding.FragmentCreateEventStep3Binding;
+import clappapp.club.clapp.model.SoftUser;
 
 public class CreateEventFragment extends Fragment implements View.OnClickListener, DatePickerDialog.OnDateSetListener,
         TimePickerDialog.OnTimeSetListener, AdapterView.OnItemSelectedListener {
 
     private static final String TAG = CreateEventFragment.class.getSimpleName();
     private static final String INTERFACE_TAG = Callbacks.class.getSimpleName();
-    private static final String CHILD_FRAGMENT_TAG = AddClappersFragment.class.getSimpleName();
+    private static final String CLAPPERS_FRAGMENT_TAG = ClappersFragment.class.getSimpleName();
+    private static final String EVENT_CARD_FRAGMENT_TAG = EventCardFragment.class.getSimpleName();
     private static final String LAYOUT_TAG = "layoutID";
 
     interface Callbacks {
-        boolean firstStepToSecondStep(String title, String type, Calendar calendar, String date, String time, String place, String description);
-        boolean secondStepToLastStep();
-        boolean showPreview();
+        void nextStep(String title, String type, String privacy, Calendar calendar, String date, String time, String place, String description);
+
+        void nextStep();
+
+        void done();
     }
 
     private static int[] sEventTypeIconResourceIDs = {
@@ -67,10 +70,23 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
             R.drawable.custom_privacy
     };
 
+    private static final ArrayList<SoftUser> sMembers = new ArrayList<>();
+
+    static {
+        sMembers.add(new SoftUser("Ergiz Gizer"));
+        sMembers.add(new SoftUser("Dilara Bozyılan"));
+        sMembers.add(new SoftUser("Mert Sağsöz"));
+        sMembers.add(new SoftUser("Dilara Ertuğrul"));
+        sMembers.add(new SoftUser("Enver Can Kayandan"));
+        sMembers.add(new SoftUser("Said Bilal Karslı"));
+    }
+
     private ViewDataBinding mBinding;
-    private int mLayoutResourceId;
     private Callbacks mCallback;
     private Calendar mCalendar;
+    private int mLayoutResourceId;
+
+    private FloatingActionButton mActionButton;
 
     //First step view objects
     private TextInputEditText mTitleEditText;
@@ -84,28 +100,70 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
     private ImageView mTimeButton;
     private ImageView mPlaceButton;
 
-    //Second step objects
-    private View mFragmentContainer;
+    //Second step view objects
     private CheckBox mChatCheckBox;
-    private FloatingActionButton mAddClapperButton;
 
-
-    //Third step view objects
-    private ImageView mEventImage;
-    private Button mEventImageAddButton;
 
     public CreateEventFragment() {
         // Required empty public constructor
     }
 
-    public static CreateEventFragment newInstance(int layoutResourceId) {
+    public static CreateEventFragment newInstance(int layoutResourceID) {
 
         Bundle args = new Bundle();
-        args.putInt(LAYOUT_TAG, layoutResourceId);
 
+        args.putInt(LAYOUT_TAG, layoutResourceID);
         CreateEventFragment fragment = new CreateEventFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    private boolean hasError() {
+        boolean error = false;
+
+        String title = mTitleEditText.getText().toString();
+        String date = mDateEditText.getText().toString();
+        String time = mTimeEditText.getText().toString();
+        String place = mPlaceEditText.getText().toString();
+        String description = mDescriptionEditText.getText().toString();
+
+        if (TextUtils.isEmpty(title)) {
+            mTitleEditText.setError("Title is required!");
+            error = true;
+        }
+        if (TextUtils.isEmpty(date)) {
+            mDateEditText.setError("You must specify the event's date!");
+            error = true;
+        }
+        if (TextUtils.isEmpty(time)) {
+            mTimeEditText.setError("You must specify the event's time!");
+            error = true;
+        }
+        if (TextUtils.isEmpty(place)) {
+            mPlaceEditText.setError("You must specify the event's place!");
+            error = true;
+        }
+        if (TextUtils.isEmpty(description)) {
+            mDescriptionEditText.setError("Description is required!");
+            error = true;
+        } else if (description.length() < 10) {
+            mDescriptionEditText.setError("Description needs to be longer!");
+            error = true;
+        }
+
+        boolean isEventTypeValid = mEventTypeSpinner.getSelectedItemPosition() != mEventTypeSpinner.getCount();
+        boolean isPrivacyValid = mPrivacySpinner.getSelectedItemPosition() != mPrivacySpinner.getCount();
+
+        if (!isEventTypeValid) {
+            ((CustomSpinnerAdapter) mEventTypeSpinner.getAdapter()).setError(mEventTypeSpinner.getSelectedView(), "Error!");
+            error = true;
+        }
+        if (!isPrivacyValid) {
+            ((CustomSpinnerAdapter) mPrivacySpinner.getAdapter()).setError(mPrivacySpinner.getSelectedView(), "Error!");
+            error = true;
+        }
+
+        return error;
     }
 
 
@@ -122,10 +180,9 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
         setRetainInstance(true);
-        mCalendar = new GregorianCalendar();
         mLayoutResourceId = getArguments().getInt(LAYOUT_TAG);
+        mCalendar = new GregorianCalendar();
     }
 
     @Override
@@ -140,36 +197,14 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
             case R.layout.fragment_create_event_step2:
                 initSecondStep(savedInstanceState);
                 break;
-            case R.layout.fragment_create_event_add_image:
-                mEventImage = ((FragmentCreateEventAddImageBinding) mBinding).eventPic;
-                mEventImageAddButton = ((FragmentCreateEventAddImageBinding) mBinding).addPicButton;
+            case R.layout.fragment_create_event_step3:
+                initThirdStep(savedInstanceState);
                 break;
         }
 
-        return mBinding.getRoot();
-    }
+        if (mActionButton != null) mActionButton.setOnClickListener(this);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.create_event_next_step:
-                switch (mLayoutResourceId) {
-                    case R.layout.fragment_create_event_step1:
-                        return mCallback.firstStepToSecondStep(mTitleEditText.getText().toString(),
-                                mEventTypeSpinner.getSelectedItem().toString(),
-                                mCalendar,
-                                mDateEditText.getText().toString(),
-                                mTimeEditText.getText().toString(),
-                                mPlaceEditText.getText().toString(),
-                                mDescriptionEditText.getText().toString());
-                    case R.layout.fragment_create_event_step2:
-                        return mCallback.secondStepToLastStep();
-                    case R.layout.fragment_create_event_add_image:
-                        return mCallback.showPreview();
-                }
-            default:
-                return true;
-        }
+        return mBinding.getRoot();
     }
 
     @Override
@@ -189,7 +224,6 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
-
         switch (v.getId()) {
             case R.id.event_date:
             case R.id.event_date_button:
@@ -201,10 +235,28 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
                 TimePickerFragment timeFragment = new TimePickerFragment();
                 timeFragment.show(getChildFragmentManager(), TimePickerFragment.TAG);
                 break;
-            case R.id.add_clapper_button:
-                Fragment fragment = getChildFragmentManager().getFragments().get(0);
-                if (fragment instanceof AddClappersFragment) {
-                    ((AddClappersFragment) fragment).onClickAddButton();
+            case R.id.action_button:
+                switch (mLayoutResourceId) {
+                    case R.layout.fragment_create_event_step1:
+                        if (!hasError()) {
+                            mCallback.nextStep(mTitleEditText.getText().toString(),
+                                    mEventTypeSpinner.getSelectedItem().toString(),
+                                    mPrivacySpinner.getSelectedItem().toString(),
+                                    mCalendar,
+                                    mDateEditText.getText().toString(),
+                                    mTimeEditText.getText().toString(),
+                                    mPlaceEditText.getText().toString(),
+                                    mDescriptionEditText.getText().toString());
+                        }
+                        break;
+                    case R.layout.fragment_create_event_step2:
+                        mCallback.nextStep();
+                        break;
+                    case R.layout.fragment_create_event_step3:
+                        mCallback.done();
+                        break;
+                    default:
+                        throw new IllegalStateException("This fragment is in an illegal state!");
                 }
         }
     }
@@ -212,7 +264,8 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (parent.equals(mPrivacySpinner) && position == parent.getCount() - 1) {
-            Log.d(TAG, "Custom privacy selected");
+            //ClappersFragment.newInstance(sMembers, getString(R.string.no_contacts))
+            //      .show(getChildFragmentManager(), CLAPPERS_FRAGMENT_TAG);
         }
     }
 
@@ -232,6 +285,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         mDateButton = ((FragmentCreateEventStep1Binding) mBinding).eventDateButton;
         mTimeButton = ((FragmentCreateEventStep1Binding) mBinding).eventTimeButton;
         mPlaceButton = ((FragmentCreateEventStep1Binding) mBinding).eventPlaceButton;
+        mActionButton = ((FragmentCreateEventStep1Binding) mBinding).actionButton;
 
         mDateButton.setOnClickListener(this);
         mTimeButton.setOnClickListener(this);
@@ -252,13 +306,24 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
 
     private void initSecondStep(Bundle savedInstanceState) {
         mChatCheckBox = ((FragmentCreateEventStep2Binding) mBinding).chatCheckBox;
-        mFragmentContainer = ((FragmentCreateEventStep2Binding) mBinding).addContactsContainer;
-        mAddClapperButton = ((FragmentCreateEventStep2Binding) mBinding).addClapperButton;
+        mActionButton = ((FragmentCreateEventStep2Binding) mBinding).actionButton;
+
         if (savedInstanceState == null) {
-            AddClappersFragment fragment =
-                    AddClappersFragment.newInstance(getString(R.string.add_contacts_prompt), getString(R.string.no_contacts));
-            getChildFragmentManager().beginTransaction().replace(R.id.add_contacts_container, fragment, CHILD_FRAGMENT_TAG).commit();
+            ClappersFragment fragment = ClappersFragment.newInstance(sMembers, getString(R.string.no_contacts));
+            getChildFragmentManager().beginTransaction()
+                    .replace(R.id.add_contacts_container, fragment, CLAPPERS_FRAGMENT_TAG)
+                    .commit();
         }
-        mAddClapperButton.setOnClickListener(this);
+    }
+
+    private void initThirdStep(Bundle savedInstanceState) {
+        mActionButton = ((FragmentCreateEventStep3Binding) mBinding).actionButton;
+
+        if (savedInstanceState == null) {
+            EventCardFragment fragment = new EventCardFragment();
+            getChildFragmentManager().beginTransaction()
+                    .replace(R.id.event_card_container, fragment, EVENT_CARD_FRAGMENT_TAG)
+                    .commit();
+        }
     }
 }

@@ -16,7 +16,7 @@
         </activity>
         <activity
             android:name=".controller.CreateEventActivity"
-            android:windowSoftInputMode="stateHidden|adjustNothing">
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

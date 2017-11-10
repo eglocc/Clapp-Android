@@ -8,6 +8,7 @@ import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,7 +96,7 @@ public class CreateAccountFragment extends Fragment implements DatePickerDialog.
                 String tName = name.getText().toString();
                 String tSurname = surname.getText().toString();
 
-                if (tEmail.equals("")) {
+                if (TextUtils.isEmpty(tEmail)) {
                     email.setError(getResources().getString(R.string.no_email_error));
                     error = true;
                 } else if (!tEmail.contains("@ku.edu.tr")) {
@@ -103,7 +104,7 @@ public class CreateAccountFragment extends Fragment implements DatePickerDialog.
                     error = true;
                 }
 
-                if (name.getText().toString().equals("")) {
+                if (TextUtils.isEmpty(tName)) {
                     name.setError(getResources().getString(R.string.no_name_error));
                     error = true;
                 } else if (name.length() < 2) {
@@ -111,7 +112,7 @@ public class CreateAccountFragment extends Fragment implements DatePickerDialog.
                     error = true;
                 }
 
-                if (surname.getText().toString().equals("")) {
+                if (TextUtils.isEmpty(tSurname)) {
                     surname.setError(getResources().getString(R.string.no_surname_error));
                     error = true;
                 } else if (surname.length() < 2) {

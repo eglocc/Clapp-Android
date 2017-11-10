@@ -4,7 +4,6 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
 
 import com.rakshakhegde.stepperindicator.StepperIndicator;
 
@@ -43,20 +42,6 @@ public class CreateEventActivity extends AppCompatActivity implements CreateEven
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_create_event, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        if (mViewPager.getCurrentItem() == 3) {
-            menu.findItem(R.id.create_event_next_step).setIcon(R.drawable.ic_done_white_18dp);
-        }
-        return true;
-    }
-
-    @Override
     public void onBackPressed() {
         int currentItem = mViewPager.getCurrentItem();
         if (currentItem == 0) {
@@ -67,35 +52,34 @@ public class CreateEventActivity extends AppCompatActivity implements CreateEven
     }
 
     @Override
-    public boolean firstStepToSecondStep(String title, String type, Calendar calendar, String date, String time, String place, String description) {
+    public void nextStep(String title, String type, String privacy, Calendar calendar, String date, String time, String place, String description) {
         mEvent.setTitle(title);
         mEvent.setType(EnumUtils.convertStringToEventType(type));
+        mEvent.setPrivacy(EnumUtils.convertStringToPrivacy(privacy));
         mEvent.setDescription(description);
         mEvent.setDateTime(calendar.getTimeInMillis());
         mEvent.setDateString(date);
         mEvent.setTimeString(time);
         mEvent.setPlace(place);
 
+
         nextPage(mViewPager.getCurrentItem());
-        return true;
     }
 
     @Override
-    public boolean secondStepToLastStep() {
+    public void nextStep() {
         int currentPosition = mViewPager.getCurrentItem();
-        nextPage(currentPosition);
-        return true;
-    }
-
-    @Override
-    public boolean showPreview() {
-        int currentPosition = mViewPager.getCurrentItem();
-        Fragment currentFragment = getSupportFragmentManager().getFragments().get(currentPosition);
-        if (currentFragment instanceof EventCardFragment) {
-            ((EventCardFragment) currentFragment).setEvent(mEvent);
+        Fragment fragment = getSupportFragmentManager().getFragments().get(currentPosition + 1);
+        Fragment childFragment = fragment.getChildFragmentManager().findFragmentByTag(EventCardFragment.class.getSimpleName());
+        if (childFragment instanceof EventCardFragment) {
+            ((EventCardFragment) childFragment).updateEventCard(mEvent);
         }
         nextPage(currentPosition);
-        return true;
+    }
+
+    @Override
+    public void done() {
+
     }
 
     private void nextPage(int currentPosition) {

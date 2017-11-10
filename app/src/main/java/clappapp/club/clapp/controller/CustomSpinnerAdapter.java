@@ -18,11 +18,18 @@ import clappapp.club.clapp.databinding.SpinnerItemOnDropdownLayoutBinding;
 
 public class CustomSpinnerAdapter extends ArrayAdapter<String> implements SpinnerAdapter {
 
+    private static final String TAG = CustomSpinnerAdapter.class.getSimpleName();
+
+    private ViewDataBinding mBinding;
     private int[] mIconResourceIds;
 
     public CustomSpinnerAdapter(@NonNull Context context, String[] data, int[] symbols) {
         super(context, 0, data);
         mIconResourceIds = symbols;
+    }
+
+    public void setError(View v, CharSequence errorText) {
+        ((SpinnerClosedLayoutBinding) mBinding).meaning.setError(errorText);
     }
 
     @Override
@@ -38,22 +45,22 @@ public class CustomSpinnerAdapter extends ArrayAdapter<String> implements Spinne
             customView = LayoutInflater.from(getContext()).inflate(layoutResourceID, parent, false);
         }
 
-        ViewDataBinding binding = DataBindingUtil.bind(customView);
+        mBinding = DataBindingUtil.bind(customView);
         String currentType = getItem(position);
 
         switch (layoutResourceID) {
             case R.layout.spinner_item_on_dropdown_layout:
-                ((SpinnerItemOnDropdownLayoutBinding) binding).meaning.setText(currentType);
-                ((SpinnerItemOnDropdownLayoutBinding) binding).symbol.setImageResource(mIconResourceIds[position]);
+                ((SpinnerItemOnDropdownLayoutBinding) mBinding).meaning.setText(currentType);
+                ((SpinnerItemOnDropdownLayoutBinding) mBinding).symbol.setImageResource(mIconResourceIds[position]);
                 break;
             case R.layout.spinner_closed_layout:
                 if (position == getCount()) {
-                    ((SpinnerClosedLayoutBinding) binding).meaning.setText(getItem(getCount()));
-                    ((SpinnerClosedLayoutBinding) binding).meaning.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
-                    ((SpinnerClosedLayoutBinding) binding).symbol.setVisibility(View.GONE);
+                    ((SpinnerClosedLayoutBinding) mBinding).meaning.setText(getItem(getCount()));
+                    ((SpinnerClosedLayoutBinding) mBinding).meaning.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+                    ((SpinnerClosedLayoutBinding) mBinding).symbol.setVisibility(View.GONE);
                 } else {
-                    ((SpinnerClosedLayoutBinding) binding).symbol.setImageResource(mIconResourceIds[position]);
-                    ((SpinnerClosedLayoutBinding) binding).meaning.setText(currentType);
+                    ((SpinnerClosedLayoutBinding) mBinding).symbol.setImageResource(mIconResourceIds[position]);
+                    ((SpinnerClosedLayoutBinding) mBinding).meaning.setText(currentType);
                 }
                 break;
         }

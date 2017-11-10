@@ -10,4 +10,11 @@ public class EnumUtils {
         }
         return Enums.EventType.valueOf(type.toUpperCase());
     }
+
+    public static Enums.Privacy convertStringToPrivacy(String privacy) {
+        if (privacy.contains(" ")) {
+            privacy = privacy.replace(" ", "");
+        }
+        return Enums.Privacy.valueOf(privacy.toUpperCase());
+    }
 }

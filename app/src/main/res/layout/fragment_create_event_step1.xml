@@ -3,22 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/create_event_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/default_horizontal_margin"
-            android:paddingRight="@dimen/default_horizontal_margin">
+            android:padding="@dimen/default_horizontal_margin">
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/event_title_input"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@+id/event_date_input"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -171,7 +170,7 @@
                 android:id="@+id/event_description_input"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/action_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/event_place_layout">
@@ -186,9 +185,20 @@
 
             </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/action_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
+                android:src="@drawable/arrow_right_white"
+                app:fabSize="auto"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
         </android.support.constraint.ConstraintLayout>
 
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
+
 
 </layout>
 

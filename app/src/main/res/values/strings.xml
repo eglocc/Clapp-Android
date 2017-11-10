@@ -46,7 +46,7 @@
     <string name="local_privacy">Local</string>
     <string name="club_privacy">Club</string>
     <string name="group_privacy">Group</string>
-    <string name="custom_privacy">Custom</string>
+    <string name="custom_privacy">Private</string>
     <string name="generate_chat">Generate chat group</string>
 
     <string name="add_image_label">Add Image</string>

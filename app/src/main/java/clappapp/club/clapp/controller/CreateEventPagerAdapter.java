@@ -23,10 +23,7 @@ public class CreateEventPagerAdapter extends FragmentStatePagerAdapter {
                 fragment = CreateEventFragment.newInstance(R.layout.fragment_create_event_step2);
                 return fragment;
             case 2:
-                fragment = CreateEventFragment.newInstance(R.layout.fragment_create_event_add_image);
-                return fragment;
-            case 3:
-                fragment = new EventCardFragment();
+                fragment = CreateEventFragment.newInstance(R.layout.fragment_create_event_step3);
                 return fragment;
             default:
                 return fragment;
@@ -35,6 +32,6 @@ public class CreateEventPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 4;
+        return 3;
     }
 }
