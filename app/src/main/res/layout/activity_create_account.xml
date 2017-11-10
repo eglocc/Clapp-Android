@@ -5,7 +5,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
+        android:paddingRight="@dimen/default_horizontal_margin"
+        android:paddingLeft="@dimen/default_horizontal_margin"
         tools:context="clappapp.club.clapp.controller.CreateAccountActivity">
 
         <TextView
@@ -38,7 +39,7 @@
 
         <View
             android:id="@+id/border"
-            android:layout_width="272dp"
+            android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#40000000"
             app:layout_constraintBottom_toTopOf="@id/create_account_pager"

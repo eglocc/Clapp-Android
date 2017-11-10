@@ -1,6 +1,7 @@
 package clappapp.club.clapp.model;
 
 public class Enums {
+
     public enum Privacy {
         GLOBAL,
         LOCAL,

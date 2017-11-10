@@ -26,12 +26,9 @@ public class CreateEventActivity extends AppCompatActivity implements CreateEven
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_create_event);
 
-        mBinding.viewPager.setAdapter(new CreateEventPagerAdapter(getSupportFragmentManager()));
-        mBinding.tabLayout.post(() -> mBinding.tabLayout.setupWithViewPager(mBinding.viewPager));
-      
         mViewPager = mBinding.createEventPager;
         mStepper = mBinding.stepper;
-        mViewPager.setAdapter(new CreateEventPagerAdapter(getSupportFragmentManager()));
+        mBinding.createEventPager.setAdapter(new CreateEventPagerAdapter(getSupportFragmentManager()));
         mStepper.setViewPager(mViewPager);
         mStepper.showStepNumberInstead(true);
         mEvent = new Event();

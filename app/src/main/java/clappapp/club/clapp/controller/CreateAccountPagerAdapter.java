@@ -14,16 +14,17 @@ public class CreateAccountPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        CreateAccountFragment fragment = new CreateAccountFragment();
+        CreateAccountFragment fragment;
+
         switch (position) {
             case 0:
-                fragment.setLayoutResourceId(R.layout.fragment_create_account_first);
+                fragment = CreateAccountFragment.newInstance(R.layout.fragment_create_account_first);
                 break;
             case 1:
-                fragment.setLayoutResourceId(R.layout.fragment_create_account_second);
+                fragment = CreateAccountFragment.newInstance(R.layout.fragment_create_account_second);
                 break;
             default:
-                return null;
+                fragment = null;
         }
         return fragment;
     }
