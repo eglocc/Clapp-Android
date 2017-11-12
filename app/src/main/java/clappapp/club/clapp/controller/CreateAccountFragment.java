@@ -26,6 +26,8 @@ import java.util.Locale;
 import clappapp.club.clapp.R;
 import clappapp.club.clapp.databinding.FragmentCreateAccountFirstBinding;
 import clappapp.club.clapp.databinding.FragmentCreateAccountSecondBinding;
+import clappapp.club.clapp.model.Enums;
+import clappapp.club.clapp.utilities.DataTypeCheckUtils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,9 +36,17 @@ public class CreateAccountFragment extends Fragment implements DatePickerDialog.
 
     interface Callbacks {
         void next(String email, String name, String surname);
+
+        void done(String password, long dob, Enums.Gender gender);
     }
 
     private static final String LAYOUT_TAG = "layoutResourceID";
+
+    private static final int[] sGenderIcons = {
+            R.mipmap.gender_male,
+            R.mipmap.gender_female,
+            R.mipmap.lgbt_flag
+    };
 
     //first fragment views
     private TextInputEditText email;
@@ -49,10 +59,12 @@ public class CreateAccountFragment extends Fragment implements DatePickerDialog.
     private TextInputEditText mConfirmPassword;
     private EditText mDoBPicker;
     private Spinner mGenderSpinner;
+    private FloatingActionButton mDoneButton;
 
     private int mLayoutResourceId;
     private ViewDataBinding mBinding;
     private Callbacks mCallback;
+    private long mDob;
 
     public CreateAccountFragment() {
         // Required empty public constructor
@@ -143,7 +155,6 @@ public class CreateAccountFragment extends Fragment implements DatePickerDialog.
 
                 if (!error) {
                     mCallback.next(tEmail, tName, tSurname);
-
                 }
             }
         });
@@ -155,6 +166,12 @@ public class CreateAccountFragment extends Fragment implements DatePickerDialog.
         mConfirmPassword = ((FragmentCreateAccountSecondBinding) mBinding).clapperPasswordConfirm;
         mDoBPicker = ((FragmentCreateAccountSecondBinding) mBinding).clapperDobPicker;
         mGenderSpinner = ((FragmentCreateAccountSecondBinding) mBinding).clapperGenderSpinner;
+        mGenderSpinner.setContentDescription(getResources().getString(R.string.gender));
+        CustomSpinnerAdapter adapter = new CustomSpinnerAdapter(getContext(),
+                getResources().getStringArray(R.array.gender_types), sGenderIcons);
+        mGenderSpinner.setAdapter(adapter);
+        mGenderSpinner.setSelection(adapter.getCount());
+        mDoneButton = ((FragmentCreateAccountSecondBinding) mBinding).doneButton;
         mDoBPicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -162,6 +179,37 @@ public class CreateAccountFragment extends Fragment implements DatePickerDialog.
                 dbfrag.show(getChildFragmentManager(), DatePickerFragment.TAG);
             }
         });
+        mDoneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean error = false;
+
+                if (DataTypeCheckUtils.checkPassword(mPassword.getText().toString()) != 1) {
+                    mPassword.setError(getResources().getString(DataTypeCheckUtils.checkPassword(mPassword.getText().toString())));
+                    error = true;
+                }
+
+                if (!(mConfirmPassword.getText().toString().equals(mPassword.getText().toString()))) {
+                    mConfirmPassword.setError(getResources().getString(R.string.password_doesnt_match));
+                    error = true;
+                }
+
+                if (mDob == 0) {
+                    mDoBPicker.setError(getResources().getString(R.string.no_date_of_birth_error));
+                    error = true;
+                }
+
+                if (mGenderSpinner.getSelectedItemPosition() == 0) {
+
+                }
+
+                if (!error) {
+                    mCallback.done(mPassword.getText().toString(), mDob, Enums.Gender.OTHER);
+                }
+            }
+        });
+
+
     }
 
     @Override
@@ -170,5 +218,6 @@ public class CreateAccountFragment extends Fragment implements DatePickerDialog.
         cal.set(year, month, day);
         final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         mDoBPicker.setText(dateFormat.format(cal.getTime()));
+        mDob = cal.getTimeInMillis();
     }
 }

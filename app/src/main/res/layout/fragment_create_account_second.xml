@@ -27,7 +27,8 @@
                     android:id="@+id/clapper_password"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/password_hint" />
+                    android:hint="@string/password_hint"
+                    android:inputType="textPassword" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -45,46 +46,40 @@
                     android:id="@+id/clapper_password_confirm"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/confirm_password" />
+                    android:hint="@string/confirm_password"
+                    android:inputType="textPassword" />
 
             </android.support.design.widget.TextInputLayout>
 
             <EditText
                 android:id="@+id/clapper_dob_picker"
-                android:layout_height="match_parent"
-                android:hint="@string/confirm_password" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:drawableRight="@drawable/calendar_blank"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="@string/date_format"
+                android:inputType="date"
+                app:layout_constraintBottom_toTopOf="@id/done_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/password_confirm_input_layout" />
 
-        </android.support.design.widget.TextInputLayout>
-
-        <EditText
-            android:id="@+id/clapper_dob_picker"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="false"
-            android:drawableRight="@drawable/calendar_blank"
-            android:drawableEnd="@drawable/calendar_blank"
-            android:hint="@string/date_format"
-            android:inputType="date"
-            android:focusable="false"
-            app:layout_constraintTop_toBottomOf="@id/password_confirm_input_layout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/clapper_gender_spinner"
-            app:layout_constraintBottom_toTopOf="@+id/gender_label" />
-
-            <Spinner
+            <android.support.v7.widget.AppCompatSpinner
                 android:id="@+id/clapper_gender_spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:spinnerMode="dialog"
+                android:prompt="@string/gender_prompt"
                 app:layout_constraintTop_toBottomOf="@id/password_confirm_input_layout"
-                app:layout_constraintStart_toEndOf="@id/clapper_dob_picker"
-                app:layout_constraintBottom_toTopOf="@id/next_page_button"
+                app:layout_constraintBottom_toTopOf="@id/done_button"
                 app:layout_constraintEnd_toEndOf="parent" />
 
             <android.support.design.widget.FloatingActionButton
-                android:id="@+id/next_page_button"
+                android:id="@+id/done_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/arrow_right_white"
+                android:src="@drawable/check_white"
                 app:fabSize="mini"
                 app:backgroundTint="@color/colorPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
