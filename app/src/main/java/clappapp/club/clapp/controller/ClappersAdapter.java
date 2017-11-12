@@ -27,12 +27,12 @@ public class ClappersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         void clapperClicked(View v, int position);
     }
 
-    private final ClappersAdapter.OnClickListener mOnClickHandler;
+    private final ClappersAdapter.OnClickListener mOnClickListener;
     private String mEmptyViewText;
     private ArrayList<SoftUser> mClappers;
 
-    public ClappersAdapter(ClappersAdapter.OnClickListener onClickHandler, ArrayList<SoftUser> clappers, String emptyViewText) {
-        mOnClickHandler = onClickHandler;
+    public ClappersAdapter(ClappersAdapter.OnClickListener onClickListener, ArrayList<SoftUser> clappers, String emptyViewText) {
+        mOnClickListener = onClickListener;
         mClappers = clappers;
         mEmptyViewText = emptyViewText;
     }
@@ -132,7 +132,7 @@ public class ClappersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         @Override
         public void onClick(View v) {
-            mOnClickHandler.clapperClicked(mClapperSelectedIcon, getAdapterPosition());
+            mOnClickListener.clapperClicked(mClapperSelectedIcon, getAdapterPosition());
         }
     }
     //End of ItemViewHolder

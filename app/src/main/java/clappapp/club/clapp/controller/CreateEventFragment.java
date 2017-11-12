@@ -210,7 +210,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
         mCalendar.set(year, month, day);
-        final SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, MMM d, yyyy", Locale.getDefault());
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         mDateEditText.setText(dateFormat.format(mCalendar.getTime()));
     }
 

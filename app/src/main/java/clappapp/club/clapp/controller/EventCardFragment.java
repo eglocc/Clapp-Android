@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.HashMap;
 
 import clappapp.club.clapp.R;
-import clappapp.club.clapp.databinding.EventCardLayoutBinding;
+import clappapp.club.clapp.databinding.FragmentEventCardBinding;
 import clappapp.club.clapp.model.Enums;
 import clappapp.club.clapp.model.Event;
 
@@ -33,7 +33,7 @@ public class EventCardFragment extends Fragment {
         sPrivacyMap.put(Enums.Privacy.PRIVATE, R.drawable.custom_privacy);
     }
 
-    private EventCardLayoutBinding mBinding;
+    private FragmentEventCardBinding mBinding;
     private Event mEvent;
 
     //Preview UI
@@ -69,7 +69,7 @@ public class EventCardFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.event_card_layout, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_event_card, container, false);
         initEventCard(savedInstanceState);
         return mBinding.getRoot();
     }
@@ -80,8 +80,8 @@ public class EventCardFragment extends Fragment {
         mPrivacyLabel = mBinding.header.privacyLabel;
         mEventTitle = mBinding.eventTitle;
         mEventDescription = mBinding.eventDescription;
-        mEventDate = mBinding.footer.eventDate;
-        mEventTime = mBinding.footer.eventTime;
+        mEventDate = mBinding.footer.date;
+        mEventTime = mBinding.footer.time;
         mEventPlace = mBinding.footer.eventPlace;
         mAddCalendarButton = mBinding.footer.addCalendarButton;
 
@@ -90,7 +90,7 @@ public class EventCardFragment extends Fragment {
         if (savedInstanceState == null) {
             AddImageFragment fragment = AddImageFragment.newInstance();
             getChildFragmentManager().beginTransaction()
-                    .replace(R.id.event_picture_frame, fragment, ADD_IMAGE_FRAGMENT_TAG)
+                    .replace(R.id.event_picture, fragment, ADD_IMAGE_FRAGMENT_TAG)
                     .commit();
         }
     }
