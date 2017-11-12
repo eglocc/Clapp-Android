@@ -45,9 +45,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
 
     interface Callbacks {
         void nextStep(String title, String type, String privacy, Calendar calendar, String date, String time, String place, String description);
-
         void nextStep();
-
         void done();
     }
 

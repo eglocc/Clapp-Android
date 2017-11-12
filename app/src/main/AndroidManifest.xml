@@ -3,6 +3,7 @@
     package="clappapp.club.clapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -19,7 +20,9 @@
             android:name=".controller.CreateEventActivity"
             android:windowSoftInputMode="stateHidden"></activity>
 
-        <activity android:name=".controller.AuthActivity">
+        <activity
+            android:name=".controller.AuthActivity"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

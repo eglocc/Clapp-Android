@@ -28,24 +28,24 @@ import clappapp.club.clapp.databinding.FragmentCreateAccountFirstBinding;
 import clappapp.club.clapp.databinding.FragmentCreateAccountSecondBinding;
 import clappapp.club.clapp.model.Enums;
 import clappapp.club.clapp.utilities.DataTypeCheckUtils;
+import clappapp.club.clapp.utilities.EnumUtils;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CreateAccountFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
-
-    interface Callbacks {
-        void next(String email, String name, String surname);
-
-        void done(String password, long dob, Enums.Gender gender);
-    }
+public class CreateAccountFragment extends Fragment implements DatePickerDialog.OnDateSetListener, View.OnClickListener {
 
     private static final String LAYOUT_TAG = "layoutResourceID";
 
+    interface Callbacks {
+        void next(String email, String name, String surname);
+        void done(String password, long dob, Enums.Gender gender);
+    }
+
     private static final int[] sGenderIcons = {
-            R.mipmap.gender_male,
-            R.mipmap.gender_female,
-            R.mipmap.lgbt_flag
+            R.drawable.gender_male,
+            R.drawable.gender_female,
+            R.drawable.lgbt_flag
     };
 
     //first fragment views
@@ -113,51 +113,29 @@ public class CreateAccountFragment extends Fragment implements DatePickerDialog.
         return mBinding.getRoot();
     }
 
-    private void initFirstFragment() {
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.next_page_button:
+                checkFirstStepErrors();
+                break;
+            case R.id.clapper_dob_picker:
+                DatePickerFragment dbfrag = new DatePickerFragment();
+                dbfrag.show(getChildFragmentManager(), DatePickerFragment.TAG);
+                break;
+            case R.id.done_button:
+                checkSecondStepErrors();
+                break;
+        }
+    }
 
+    private void initFirstFragment() {
         email = ((FragmentCreateAccountFirstBinding) mBinding).clapperEmail;
         name = ((FragmentCreateAccountFirstBinding) mBinding).clapperName;
         surname = ((FragmentCreateAccountFirstBinding) mBinding).clapperSurname;
         forwardButton = ((FragmentCreateAccountFirstBinding) mBinding).nextPageButton;
 
-        forwardButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean error = false;
-
-                String tEmail = email.getText().toString();
-                String tName = name.getText().toString();
-                String tSurname = surname.getText().toString();
-
-                if (TextUtils.isEmpty(tEmail)) {
-                    email.setError(getResources().getString(R.string.no_email_error));
-                    error = true;
-                } else if (!tEmail.contains("@ku.edu.tr")) {
-                    email.setError(getResources().getString(R.string.email_not_valid_error));
-                    error = true;
-                }
-
-                if (TextUtils.isEmpty(tName)) {
-                    name.setError(getResources().getString(R.string.no_name_error));
-                    error = true;
-                } else if (name.length() < 2) {
-                    name.setError(getResources().getString(R.string.name_too_short_error));
-                    error = true;
-                }
-
-                if (TextUtils.isEmpty(tSurname)) {
-                    surname.setError(getResources().getString(R.string.no_surname_error));
-                    error = true;
-                } else if (surname.length() < 2) {
-                    surname.setError(getResources().getString(R.string.surname_too_short_error));
-                    error = true;
-                }
-
-                if (!error) {
-                    mCallback.next(tEmail, tName, tSurname);
-                }
-            }
-        });
+        forwardButton.setOnClickListener(this);
     }
 
     private void initSecondFragment() {
@@ -166,50 +144,80 @@ public class CreateAccountFragment extends Fragment implements DatePickerDialog.
         mConfirmPassword = ((FragmentCreateAccountSecondBinding) mBinding).clapperPasswordConfirm;
         mDoBPicker = ((FragmentCreateAccountSecondBinding) mBinding).clapperDobPicker;
         mGenderSpinner = ((FragmentCreateAccountSecondBinding) mBinding).clapperGenderSpinner;
+        mDoneButton = ((FragmentCreateAccountSecondBinding) mBinding).doneButton;
+
         mGenderSpinner.setContentDescription(getResources().getString(R.string.gender));
         CustomSpinnerAdapter adapter = new CustomSpinnerAdapter(getContext(),
                 getResources().getStringArray(R.array.gender_types), sGenderIcons);
         mGenderSpinner.setAdapter(adapter);
         mGenderSpinner.setSelection(adapter.getCount());
-        mDoneButton = ((FragmentCreateAccountSecondBinding) mBinding).doneButton;
-        mDoBPicker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DatePickerFragment dbfrag = new DatePickerFragment();
-                dbfrag.show(getChildFragmentManager(), DatePickerFragment.TAG);
-            }
-        });
-        mDoneButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean error = false;
 
-                if (DataTypeCheckUtils.checkPassword(mPassword.getText().toString()) != 1) {
-                    mPassword.setError(getResources().getString(DataTypeCheckUtils.checkPassword(mPassword.getText().toString())));
-                    error = true;
-                }
+        mDoBPicker.setOnClickListener(this);
+        mDoneButton.setOnClickListener(this);
+    }
 
-                if (!(mConfirmPassword.getText().toString().equals(mPassword.getText().toString()))) {
-                    mConfirmPassword.setError(getResources().getString(R.string.password_doesnt_match));
-                    error = true;
-                }
+    private void checkFirstStepErrors() {
+        boolean error = false;
 
-                if (mDob == 0) {
-                    mDoBPicker.setError(getResources().getString(R.string.no_date_of_birth_error));
-                    error = true;
-                }
+        String tEmail = email.getText().toString();
+        String tName = name.getText().toString();
+        String tSurname = surname.getText().toString();
 
-                if (mGenderSpinner.getSelectedItemPosition() == 0) {
+        if (TextUtils.isEmpty(tEmail)) {
+            email.setError(getResources().getString(R.string.no_email_error));
+            error = true;
+        } else if (!tEmail.contains("@ku.edu.tr")) {
+            email.setError(getResources().getString(R.string.email_not_valid_error));
+            error = true;
+        }
 
-                }
+        if (TextUtils.isEmpty(tName)) {
+            name.setError(getResources().getString(R.string.no_name_error));
+            error = true;
+        } else if (name.length() < 2) {
+            name.setError(getResources().getString(R.string.name_too_short_error));
+            error = true;
+        }
 
-                if (!error) {
-                    mCallback.done(mPassword.getText().toString(), mDob, Enums.Gender.OTHER);
-                }
-            }
-        });
+        if (TextUtils.isEmpty(tSurname)) {
+            surname.setError(getResources().getString(R.string.no_surname_error));
+            error = true;
+        } else if (surname.length() < 2) {
+            surname.setError(getResources().getString(R.string.surname_too_short_error));
+            error = true;
+        }
 
+        if (!error) {
+            mCallback.next(tEmail, tName, tSurname);
+        }
+    }
 
+    private void checkSecondStepErrors() {
+        boolean error = false;
+
+        if (DataTypeCheckUtils.checkPassword(mPassword.getText().toString()) != 1) {
+            mPassword.setError(getResources().getString(DataTypeCheckUtils.checkPassword(mPassword.getText().toString())));
+            error = true;
+        }
+
+        if (!(mConfirmPassword.getText().toString().equals(mPassword.getText().toString()))) {
+            mConfirmPassword.setError(getResources().getString(R.string.password_doesnt_match));
+            error = true;
+        }
+
+        if (mDob == 0) {
+            mDoBPicker.setError(getResources().getString(R.string.no_date_of_birth_error));
+            error = true;
+        }
+
+        if (mGenderSpinner.getSelectedItemPosition() == 0) {
+
+        }
+
+        if (!error) {
+            mCallback.done(mPassword.getText().toString(),
+                    mDob, EnumUtils.convertStringToGender(mGenderSpinner.getSelectedItem().toString()));
+        }
     }
 
     @Override

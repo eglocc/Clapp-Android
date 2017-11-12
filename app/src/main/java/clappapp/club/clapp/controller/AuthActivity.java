@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,15 +20,15 @@ import com.google.firebase.auth.FirebaseUser;
 import clappapp.club.clapp.R;
 import clappapp.club.clapp.databinding.ActivityAuthBinding;
 
-public class AuthActivity extends Activity {
+public class AuthActivity extends Activity implements View.OnClickListener {
 
-    ActivityAuthBinding mBinding;
-    EditText mEmail;
-    EditText mPassword;
-    Button mBtnLogin;
-    Button mBtnSignup;
-    Button mBtnGuest;
-    FirebaseAuth mAuth;
+    private ActivityAuthBinding mBinding;
+    private EditText mEmail;
+    private EditText mPassword;
+    private Button mBtnLogin;
+    private Button mBtnSignup;
+    private Button mBtnGuest;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,5 +67,6 @@ public class AuthActivity extends Activity {
 
             }
         });
+
     }
 }

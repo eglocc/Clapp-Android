@@ -67,11 +67,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginRight="@dimen/default_vertical_margin"
+                    android:layout_marginEnd="@dimen/default_vertical_margin"
                     android:clickable="false"
                     android:drawableRight="@drawable/calendar_blank"
                     android:focusable="false"
                     android:focusableInTouchMode="false"
-                    android:layout_marginRight="@dimen/default_horizontal_margin"
                     android:hint="@string/date_format"
                     android:inputType="date" />
 
