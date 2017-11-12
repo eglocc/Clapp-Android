@@ -14,10 +14,12 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".controller.CreateAccountActivity"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden"></activity>
+
         <activity
             android:name=".controller.CreateEventActivity"
             android:windowSoftInputMode="stateHidden"></activity>
+
         <activity
             android:name=".controller.AuthActivity"
             android:windowSoftInputMode="stateHidden">
@@ -27,6 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".controller.MainActivity"></activity>
     </application>
 

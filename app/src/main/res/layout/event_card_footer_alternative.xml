@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/default_vertical_margin"
             android:layout_marginRight="@dimen/default_vertical_margin"
-            android:backgroundTint="@color/colorPrimary"
+            app:backgroundTint="@color/colorPrimary"
             android:src="@drawable/calendar_plus_white"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

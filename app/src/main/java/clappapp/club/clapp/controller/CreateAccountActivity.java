@@ -26,7 +26,7 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
     private Long mDateOfBirth;
     private Enums.Gender mGender;
     private FirebaseAuth mAuth;
-    private FirebaseDatabase mDatabase;
+    FirebaseDatabase mDatabase;
 
     private ActivityCreateAccountBinding mBinding;
     private NonSwipeableViewPager mViewPager;
@@ -40,6 +40,7 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
         getSupportActionBar().hide();
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
+        mDatabase.getReference("users").setValue(1);
     }
 
     @Override
@@ -69,7 +70,8 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
     }
 
     private void createAccount() {
-        mAuth.createUserWithEmailAndPassword(mEmail, mPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.createUserWithEmailAndPassword(mEmail, mPassword)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
@@ -79,13 +81,17 @@ public class CreateAccountActivity extends AppCompatActivity implements CreateAc
                     user.setEmail(mEmail);
                     user.setDateOfBirth(mDateOfBirth);
                     user.setGender(mGender);
-                    mDatabase.getReference("users").child(mEmail).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    user.setID(mAuth.getCurrentUser().getUid());
+                    mDatabase.getReference("users").child(user.getEncodedEmail()).setValue(user)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            mAuth.signInWithEmailAndPassword(mEmail, mPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            mAuth.signInWithEmailAndPassword(mEmail, mPassword)
+                                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
-                                    Toast.makeText(CreateAccountActivity.this, getResources().getString(R.string.account_created), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(CreateAccountActivity.this,
+                                            getResources().getString(R.string.account_created), Toast.LENGTH_SHORT).show();
                                     onBackPressed();
                                 }
                             });

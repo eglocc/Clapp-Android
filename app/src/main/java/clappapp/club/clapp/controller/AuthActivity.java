@@ -41,44 +41,32 @@ public class AuthActivity extends Activity implements View.OnClickListener {
         mBtnGuest = mBinding.guestButton;
         mAuth = FirebaseAuth.getInstance();
 
-        mBtnLogin.setOnClickListener(this);
+        mBtnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!((mEmail.getText().equals("")) || (mPassword.getText().equals("")))) {
+                    mAuth.signInWithEmailAndPassword(mEmail.getText().toString(), mPassword.getText().toString())
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        Toast.makeText(AuthActivity.this, getResources().getString(R.string.user_greeting) + " " + user.getDisplayName() + "!", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(getBaseContext(), MainActivity.class));
+                                    }
+                                }
+                            });
+                }
+            }
+        });
 
-        mBtnSignup.setOnClickListener(this);
+        mBtnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getBaseContext(), CreateAccountActivity.class);
 
-        mBtnGuest.setOnClickListener(this);
-    }
+            }
+        });
 
-    private void signInWithEmailAndPassword() {
-        if (!TextUtils.isEmpty(mEmail.getText())) {
-            mAuth.signInWithEmailAndPassword(mEmail.getText().toString(), mPassword.getText().toString())
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                Toast.makeText(AuthActivity.this, getResources().getString(R.string.no_password_error) + user.getDisplayName() + "!", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        Intent intent = null;
-        switch (v.getId()) {
-            case R.id.login_button:
-                signInWithEmailAndPassword();
-                intent = new Intent(AuthActivity.this, MainActivity.class);
-                break;
-            case R.id.signup_button:
-                intent = new Intent(AuthActivity.this, CreateAccountActivity.class);
-                break;
-            case R.id.guest_button:
-                intent = new Intent(AuthActivity.this, MainActivity.class);
-                break;
-        }
-
-        if (intent != null) startActivity(intent);
     }
 }

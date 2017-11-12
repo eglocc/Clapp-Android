@@ -11,8 +11,9 @@ public class User implements Serializable {
     private String mName;
     private String mSurname;
     private String mEmail;
+    private String mEncodedEmail;
     private Enums.Gender mGender;
-    private long mID;
+    private String mID;
     private long mDateOfBirth;
     private long mUniversityID;
     private String mImageLink;
@@ -56,6 +57,15 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.mEmail = email;
+        this.mEncodedEmail = encodeEmail(email);
+    }
+
+    public String getEncodedEmail() {
+        return mEncodedEmail;
+    }
+
+    public void setEncodedEmail(String encodedEmail) {
+        this.mEncodedEmail = encodedEmail;
     }
 
     public Enums.Gender getGender() {
@@ -66,11 +76,11 @@ public class User implements Serializable {
         this.mGender = gender;
     }
 
-    public long getID() {
+    public String getID() {
         return mID;
     }
 
-    public void setID(long ID) {
+    public void setID(String ID) {
         this.mID = ID;
     }
 
@@ -144,6 +154,14 @@ public class User implements Serializable {
 
     public void setEventsAttended(ArrayList<Long> eventsAttended) {
         this.mEventsAttended = eventsAttended;
+    }
+
+    private String encodeEmail(String email) {
+        return email.replaceAll(".", ",");
+    }
+
+    private String decodeEmail(String email) {
+        return email.replaceAll(",", ".");
     }
 }
 
