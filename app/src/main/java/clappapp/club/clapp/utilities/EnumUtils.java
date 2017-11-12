@@ -17,4 +17,11 @@ public class EnumUtils {
         }
         return Enums.Privacy.valueOf(privacy.toUpperCase());
     }
+
+    public static Enums.Gender convertStringToGender(String gender) {
+        if (gender.contains(" ")) {
+            gender = gender.replace(" ", "");
+        }
+        return Enums.Gender.valueOf(gender.toUpperCase());
+    }
 }

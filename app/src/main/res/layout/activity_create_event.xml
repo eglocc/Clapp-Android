@@ -22,7 +22,8 @@
             android:id="@+id/create_event_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/stepper" />
+            android:layout_below="@id/stepper"
+            android:overScrollMode="never" />
 
     </RelativeLayout>
 
