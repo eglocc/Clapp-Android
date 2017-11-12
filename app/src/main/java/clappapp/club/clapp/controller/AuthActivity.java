@@ -43,14 +43,15 @@ public class AuthActivity extends Activity {
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mEmail.getText().equals("")) {
+                if (!((mEmail.getText().equals("")) || (mPassword.getText().equals("")))) {
                     mAuth.signInWithEmailAndPassword(mEmail.getText().toString(), mPassword.getText().toString())
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         FirebaseUser user = mAuth.getCurrentUser();
-                                        Toast.makeText(AuthActivity.this, getResources().getString(R.string.no_password_error) + user.getDisplayName() + "!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(AuthActivity.this, getResources().getString(R.string.user_greeting) + " " + user.getDisplayName() + "!", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(getBaseContext(), MainActivity.class));
                                     }
                                 }
                             });
@@ -62,7 +63,7 @@ public class AuthActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), CreateAccountActivity.class);
-                startActivity(intent);
+
             }
         });
     }
