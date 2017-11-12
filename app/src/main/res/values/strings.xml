@@ -13,6 +13,10 @@
     <string name="sign_up">SIGN UP</string>
     <string name="continue_as_a_guest">CONTINUE AS A GUEST</string>
 
+    <string name="user_greeting">Hello </string>
+
+    <string name="account_created">Account Created Successfully!</string>
+
     <string name="name_hint">Name</string>
     <string name="surname_hint">Surname</string>
     <string name="email_hint">Email</string>
@@ -22,7 +26,8 @@
     <string name="gender">Gender</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
-    <string name="other">Keep me fuckin\' away from you norms!</string>
+    <string name="other">Other</string>
+    <string name="gender_prompt">Select gender</string>
 
     <string name="event_title">Title</string>
     <string name="event_description">Description</string>
@@ -51,15 +56,21 @@
 
     <string name="add_image_label">Add Image</string>
 
-    <string name="no_name_error">Name field can\'t be empty!</string>
-    <string name="no_email_error">Email field can\'t be empty!</string>
-    <string name="no_surname_error">Surname field can\'t be empty!</string>
+    <string name="no_name_error">Please enter your name!</string>
+    <string name="no_email_error">Please enter your email!</string>
+    <string name="no_surname_error">Please enter your surname!</string>
+    <string name="no_password_error">Please enter your password!</string>
     <string name="email_not_valid_error">Email is not valid!</string>
     <string name="name_too_short_error">Name must be at least 2 characters!</string>
     <string name="surname_too_short_error">Surname must be at least 2 characters!</string>
     <string name="password_too_short_error">Password must contain at least 8 characters!</string>
     <string name="password_too_weak_error">Password must contain at least two of: letter, number, special character!</string>
-    <string name="no_date_of_birth_error">Date of Birth can\'t be empty!</string>
+    <string name="no_date_of_birth_error">Please pick your date of birth!</string>
+    <string name="password_no_letters">Password must contain letters!</string>
+    <string name="younger_than_13">You must be older than 13 years to join our community!</string>
+    <string name="password_doesnt_match">Passwords must match!</string>
+
+    <string name="user_exists_error">Email is already in use! <a>Forgot your password?</a></string>
 
     <string name="date_format">DD/MM/YYYY</string>
 

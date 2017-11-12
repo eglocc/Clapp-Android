@@ -39,10 +39,25 @@ public class DataTypeCheckUtils {
 
     public static int checkPassword(String password) {
 
+        if (containsLetter(password) != 1) {
+            return containsLetter(password);
+        }
+
         if (password.length() < MIN_PASSWORD_LENGTH) {
             return R.string.password_too_short_error;
         }
 
         return 1;
+    }
+
+    private static int containsLetter(String password) {
+        boolean ret = false;
+
+        for (int i = 0; i < password.length(); i++) {
+            if ((password.charAt(i) <= 'Z' && password.charAt(i) >= 'A') || (password.charAt(i) >= 'a' && password.charAt(i) <= 'z')) {
+                return 1;
+            }
+        }
+        return R.string.password_no_letters;
     }
 }

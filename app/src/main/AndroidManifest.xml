@@ -15,6 +15,8 @@
         <activity
             android:name=".controller.CreateEventActivity"
             android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name=".controller.AuthActivity"></activity>
+
         <activity android:name=".controller.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

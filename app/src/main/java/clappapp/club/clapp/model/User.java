@@ -5,12 +5,13 @@ import java.util.ArrayList;
 
 public class User implements Serializable {
 
-    private User() {
+    public User() {
     }
 
     private String mName;
     private String mSurname;
     private String mEmail;
+    private Enums.Gender mGender;
     private long mID;
     private long mDateOfBirth;
     private long mUniversityID;
@@ -55,6 +56,14 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.mEmail = email;
+    }
+
+    public Enums.Gender getGender() {
+        return this.mGender;
+    }
+
+    public void setGender(Enums.Gender gender) {
+        this.mGender = gender;
     }
 
     public long getID() {
