@@ -45,9 +45,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
 
     interface Callbacks {
         void nextStep(String title, String type, String privacy, Calendar calendar, String date, String time, String place, String description);
-
         void nextStep();
-
         void done();
     }
 
@@ -181,7 +179,6 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        setHasOptionsMenu(true);
         mLayoutResourceId = getArguments().getInt(LAYOUT_TAG);
         mCalendar = new GregorianCalendar();
     }

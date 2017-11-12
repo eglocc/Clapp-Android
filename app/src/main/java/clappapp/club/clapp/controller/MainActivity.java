@@ -35,9 +35,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
+        String lorem = "Lorem ipsum dolor sit amet, delicatissimi te mea. Ex utamur qualisque.";
+
         mEvents = new ArrayList<>();
         mEvents.add(new SoftEvent("LEAP",
-                "???????????",
+                lorem,
                 R.drawable.leap,
                 "12/11/17",
                 "09:30",
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 "KU IES",
                 R.mipmap.icon_ies));
         mEvents.add(new SoftEvent("Zero To One",
-                "????????",
+                lorem,
                 R.drawable.zerotoone,
                 "18/03/2017",
                 "10:00",
@@ -57,17 +59,17 @@ public class MainActivity extends AppCompatActivity {
                 "KU Girişimcilik",
                 R.mipmap.ic_launcher_round));
         mEvents.add(new SoftEvent("IES Warm Up Party",
-                "????????????????",
+                lorem,
                 R.drawable.ies_warmup_party,
                 "28/09/2017",
                 "23:00",
-                "????",
+                "Mitte",
                 Enums.EventType.PARTY,
                 Enums.Privacy.GLOBAL,
                 "KU IES",
                 R.mipmap.icon_ies));
         mEvents.add(new SoftEvent("KUnvetion 2017",
-                "???????????????????",
+                lorem,
                 R.drawable.winter_is_coming,
                 "18/11/2017",
                 "11:00",
@@ -76,6 +78,16 @@ public class MainActivity extends AppCompatActivity {
                 Enums.Privacy.GLOBAL,
                 "KU FRP",
                 R.mipmap.icon_frp));
+        mEvents.add(new SoftEvent("Hakan Baş ile Söyleşi",
+                lorem,
+                R.drawable.hakanbasconference,
+                "14/12/2016",
+                "17:30",
+                "SGKM",
+                Enums.EventType.CONFERENCE,
+                Enums.Privacy.LOCAL,
+                "KU Girişimcilik",
+                R.mipmap.ic_launcher_round));
 
         mViewPager = mBinding.viewPager;
         mTabLayout = mBinding.tabLayout;

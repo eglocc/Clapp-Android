@@ -69,7 +69,8 @@ public class EventDisplayerFragment extends Fragment implements EventAdapter.OnC
         mEventAdapter = new EventAdapter(this, mEvents);
         mEventRecycler.setAdapter(mEventAdapter);
 
-        //if (mEvents.size() == 0) showEmptyView(); else showEventData();
+        if (mEvents.size() == 0) showEmptyView();
+        else showEventData();
 
         return mBinding.getRoot();
     }
