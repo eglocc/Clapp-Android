@@ -4,9 +4,6 @@ import java.util.ArrayList;
 
 public class Event {
 
-    public Event() {
-    }
-
     private long mID;
     private Enums.EventType mType;
     private String mTitle;
@@ -18,7 +15,9 @@ public class Event {
     private String mMapLink;
     private ArrayList<String> mMapList;
     private ArrayList<Long> mClappers;
-    private String mImageLink;
+    private int mImageLink;
+    /*!*/private String mClubName;
+    /*!*/private int mClubIcon;
     private long mClubID;
     private long mCreatorID;
     private long mCreateDateTime;
@@ -27,6 +26,22 @@ public class Event {
     private Enums.Privacy mPrivacy;
     private long mChatroomID;
     private ArrayList<Long> mContacts;
+
+    public Event() {
+    }
+
+    public Event(String title, String description, int imageLink, String date, String time, String place, Enums.EventType type, Enums.Privacy privacy, String clubName, int clubIcon) {
+        mTitle = title;
+        mDescription = description;
+        mImageLink = imageLink;
+        mDateString = date;
+        mTimeString = time;
+        mPlace = place;
+        mType = type;
+        mPrivacy = privacy;
+        mClubName = clubName;
+        mClubIcon = clubIcon;
+    }
 
     public long getID() {
         return mID;
@@ -100,11 +115,11 @@ public class Event {
         this.mClappers = clappers;
     }
 
-    public String getImageLink() {
+    public int getImageLink() {
         return mImageLink;
     }
 
-    public void setImageLink(String imageLink) {
+    public void setImageLink(int imageLink) {
         this.mImageLink = imageLink;
     }
 
@@ -178,5 +193,21 @@ public class Event {
 
     public void setDateString(String dateString) {
         this.mDateString = dateString;
+    }
+
+    public String getClubName() {
+        return mClubName;
+    }
+
+    public void setClubName(String clubName) {
+        this.mClubName = clubName;
+    }
+
+    public int getClubIcon() {
+        return mClubIcon;
+    }
+
+    public void setClubIcon(int clubIcon) {
+        this.mClubIcon = clubIcon;
     }
 }

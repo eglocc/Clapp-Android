@@ -51,25 +51,18 @@
 
             <EditText
                 android:id="@+id/clapper_dob_picker"
-                android:layout_height="match_parent"
-                android:hint="@string/confirm_password" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <EditText
-            android:id="@+id/clapper_dob_picker"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="false"
-            android:drawableRight="@drawable/calendar_blank"
-            android:drawableEnd="@drawable/calendar_blank"
-            android:hint="@string/date_format"
-            android:inputType="date"
-            android:focusable="false"
-            app:layout_constraintTop_toBottomOf="@id/password_confirm_input_layout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/clapper_gender_spinner"
-            app:layout_constraintBottom_toTopOf="@+id/gender_label" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:drawableRight="@drawable/calendar_blank"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="@string/date_format"
+                android:inputType="date"
+                app:layout_constraintBottom_toTopOf="@id/next_page_button"
+                app:layout_constraintEnd_toStartOf="@id/clapper_gender_spinner"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/password_confirm_input_layout" />
 
             <Spinner
                 android:id="@+id/clapper_gender_spinner"

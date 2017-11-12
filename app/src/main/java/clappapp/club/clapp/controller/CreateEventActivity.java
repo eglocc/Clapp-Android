@@ -29,11 +29,12 @@ public class CreateEventActivity extends AppCompatActivity implements CreateEven
         super.onCreate(savedInstanceState);
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_create_event);
 
-        mEventAdapter = new CreateEventPagerAdapter(getSupportFragmentManager());
-        mBinding.createEventPager.setAdapter(mEventAdapter);
-
         mViewPager = mBinding.createEventPager;
         mStepper = mBinding.stepper;
+
+
+        mEventAdapter = new CreateEventPagerAdapter(getSupportFragmentManager());
+        mViewPager.setAdapter(mEventAdapter);
 
         mStepper.setViewPager(mViewPager);
         mStepper.showStepNumberInstead(true);
@@ -79,7 +80,7 @@ public class CreateEventActivity extends AppCompatActivity implements CreateEven
 
     @Override
     public void done() {
-
+        finish();
     }
 
     private void nextPage(int currentPosition) {
