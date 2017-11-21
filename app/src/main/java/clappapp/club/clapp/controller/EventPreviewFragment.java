@@ -17,9 +17,9 @@ import clappapp.club.clapp.databinding.FragmentEventCardBinding;
 import clappapp.club.clapp.model.Enums;
 import clappapp.club.clapp.model.Event;
 
-public class EventCardFragment extends Fragment {
+public class EventPreviewFragment extends Fragment {
 
-    private static final String TAG = EventCardFragment.class.getSimpleName();
+    private static final String TAG = EventPreviewFragment.class.getSimpleName();
 
     private static final String ADD_IMAGE_FRAGMENT_TAG = AddImageFragment.class.getSimpleName();
 
@@ -47,7 +47,7 @@ public class EventCardFragment extends Fragment {
     private TextView mEventPlace;
     private FloatingActionButton mAddCalendarButton;
 
-    public EventCardFragment() {
+    public EventPreviewFragment() {
         // Required empty public constructor
     }
 

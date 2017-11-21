@@ -28,21 +28,24 @@ import clappapp.club.clapp.model.SoftEvent;
 public class EventDisplayerFragment extends Fragment implements EventAdapter.OnClickListener {
 
     private static final String EVENT_LIST_TAG = "event_list";
+    private static final String SHOW_HEADER_TAG = "show_header";
 
     private FragmentEventDisplayerBinding mBinding;
     private RecyclerView mEventRecycler;
     private EventAdapter mEventAdapter;
     private TextView mEmptyView;
     private ArrayList<SoftEvent> mEvents;
+    private boolean mShowHeader;
 
     public EventDisplayerFragment() {
         // Required empty public constructor
     }
 
-    public static EventDisplayerFragment newInstance(ArrayList<SoftEvent> events) {
+    public static EventDisplayerFragment newInstance(ArrayList<SoftEvent> events, boolean showHeader) {
 
         Bundle args = new Bundle();
         args.putSerializable(EVENT_LIST_TAG, events);
+        args.putBoolean(SHOW_HEADER_TAG, showHeader);
 
         EventDisplayerFragment fragment = new EventDisplayerFragment();
         fragment.setArguments(args);
@@ -53,7 +56,6 @@ public class EventDisplayerFragment extends Fragment implements EventAdapter.OnC
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        mEvents = (ArrayList<SoftEvent>) getArguments().getSerializable(EVENT_LIST_TAG);
     }
 
     @Override
@@ -63,10 +65,13 @@ public class EventDisplayerFragment extends Fragment implements EventAdapter.OnC
         mEventRecycler = mBinding.eventRecycler;
         mEmptyView = mBinding.emptyView;
 
+        mEvents = (ArrayList<SoftEvent>) getArguments().getSerializable(EVENT_LIST_TAG);
+        mShowHeader = getArguments().getBoolean(SHOW_HEADER_TAG);
+
         mEventRecycler.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         mEventRecycler.setLayoutManager(layoutManager);
-        mEventAdapter = new EventAdapter(this, mEvents);
+        mEventAdapter = new EventAdapter(this, mEvents, mShowHeader);
         mEventRecycler.setAdapter(mEventAdapter);
 
         if (mEvents.size() == 0) showEmptyView();

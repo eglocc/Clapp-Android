@@ -23,7 +23,6 @@ import android.widget.ImageView;
 import android.widget.TimePicker;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
@@ -32,7 +31,9 @@ import clappapp.club.clapp.R;
 import clappapp.club.clapp.databinding.FragmentCreateEventStep1Binding;
 import clappapp.club.clapp.databinding.FragmentCreateEventStep2Binding;
 import clappapp.club.clapp.databinding.FragmentCreateEventStep3Binding;
-import clappapp.club.clapp.model.SoftUser;
+import clappapp.club.clapp.model.DataHelper;
+import clappapp.club.clapp.model.SoftEvent;
+import clappapp.club.clapp.utilities.EnumUtils;
 
 public class CreateEventFragment extends Fragment implements View.OnClickListener, DatePickerDialog.OnDateSetListener,
         TimePickerDialog.OnTimeSetListener, AdapterView.OnItemSelectedListener {
@@ -40,11 +41,11 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
     private static final String TAG = CreateEventFragment.class.getSimpleName();
     private static final String INTERFACE_TAG = Callbacks.class.getSimpleName();
     private static final String CLAPPERS_FRAGMENT_TAG = ClappersFragment.class.getSimpleName();
-    private static final String EVENT_CARD_FRAGMENT_TAG = EventCardFragment.class.getSimpleName();
+    private static final String EVENT_CARD_FRAGMENT_TAG = EventPreviewFragment.class.getSimpleName();
     private static final String LAYOUT_TAG = "layoutID";
 
     interface Callbacks {
-        void nextStep(String title, String type, String privacy, Calendar calendar, String date, String time, String place, String description);
+        void nextStep(SoftEvent event);
         void nextStep();
         void done();
     }
@@ -68,18 +69,8 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
             R.drawable.custom_privacy
     };
 
-    private static final ArrayList<SoftUser> sMembers = new ArrayList<>();
-
-    static {
-        sMembers.add(new SoftUser("Ergiz Gizer"));
-        sMembers.add(new SoftUser("Dilara Bozyılan"));
-        sMembers.add(new SoftUser("Mert Sağsöz"));
-        sMembers.add(new SoftUser("Dilara Ertuğrul"));
-        sMembers.add(new SoftUser("Enver Can Kayandan"));
-        sMembers.add(new SoftUser("Said Bilal Karslı"));
-    }
-
     private ViewDataBinding mBinding;
+    private DataHelper mDataHelper;
     private Callbacks mCallback;
     private Calendar mCalendar;
     private int mLayoutResourceId;
@@ -164,6 +155,23 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         return error;
     }
 
+    private void createEvent() {
+        if (!hasError()) {
+            SoftEvent event = new SoftEvent();
+
+            String type = mEventTypeSpinner.getSelectedItem().toString();
+            String privacy = mPrivacySpinner.getSelectedItem().toString();
+            event.setTitle(mTitleEditText.getText().toString());
+            event.setType(EnumUtils.convertStringToEventType(type));
+            event.setPrivacy(EnumUtils.convertStringToPrivacy(privacy));
+            event.setDateTime(mCalendar.getTimeInMillis());
+            event.setDateString(mDateEditText.getText().toString());
+            event.setTimeString(mTimeEditText.getText().toString());
+            event.setPlace(mPlaceEditText.getText().toString());
+            event.setDescription(mDescriptionEditText.getText().toString());
+            mCallback.nextStep(event);
+        }
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -179,6 +187,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        mDataHelper = DataHelper.getInstance();
         mLayoutResourceId = getArguments().getInt(LAYOUT_TAG);
         mCalendar = new GregorianCalendar();
     }
@@ -236,16 +245,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
             case R.id.action_button:
                 switch (mLayoutResourceId) {
                     case R.layout.fragment_create_event_step1:
-                        if (!hasError()) {
-                            mCallback.nextStep(mTitleEditText.getText().toString(),
-                                    mEventTypeSpinner.getSelectedItem().toString(),
-                                    mPrivacySpinner.getSelectedItem().toString(),
-                                    mCalendar,
-                                    mDateEditText.getText().toString(),
-                                    mTimeEditText.getText().toString(),
-                                    mPlaceEditText.getText().toString(),
-                                    mDescriptionEditText.getText().toString());
-                        }
+                        createEvent();
                         break;
                     case R.layout.fragment_create_event_step2:
                         mCallback.nextStep();
@@ -307,7 +307,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         mActionButton = ((FragmentCreateEventStep2Binding) mBinding).actionButton;
 
         if (savedInstanceState == null) {
-            ClappersFragment fragment = ClappersFragment.newInstance(sMembers, getString(R.string.no_contacts));
+            ClappersFragment fragment = ClappersFragment.newInstance(mDataHelper.getFakeMembers(), getString(R.string.no_contacts));
             getChildFragmentManager().beginTransaction()
                     .replace(R.id.add_contacts_container, fragment, CLAPPERS_FRAGMENT_TAG)
                     .commit();
@@ -318,7 +318,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         mActionButton = ((FragmentCreateEventStep3Binding) mBinding).actionButton;
 
         if (savedInstanceState == null) {
-            EventCardFragment fragment = new EventCardFragment();
+            EventPreviewFragment fragment = new EventPreviewFragment();
             getChildFragmentManager().beginTransaction()
                     .replace(R.id.event_card_container, fragment, EVENT_CARD_FRAGMENT_TAG)
                     .commit();

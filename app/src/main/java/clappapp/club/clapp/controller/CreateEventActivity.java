@@ -7,12 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.rakshakhegde.stepperindicator.StepperIndicator;
 
-import java.util.Calendar;
-
 import clappapp.club.clapp.R;
 import clappapp.club.clapp.databinding.ActivityCreateEventBinding;
-import clappapp.club.clapp.model.Event;
-import clappapp.club.clapp.utilities.EnumUtils;
+import clappapp.club.clapp.model.SoftEvent;
 
 public class CreateEventActivity extends AppCompatActivity implements CreateEventFragment.Callbacks {
 
@@ -22,7 +19,7 @@ public class CreateEventActivity extends AppCompatActivity implements CreateEven
     private NonSwipeableViewPager mViewPager;
     private CreateEventPagerAdapter mEventAdapter;
     private StepperIndicator mStepper;
-    private Event mEvent;
+    private SoftEvent mEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +35,6 @@ public class CreateEventActivity extends AppCompatActivity implements CreateEven
 
         mStepper.setViewPager(mViewPager);
         mStepper.showStepNumberInstead(true);
-
-        mEvent = new Event();
     }
 
     @Override
@@ -53,17 +48,8 @@ public class CreateEventActivity extends AppCompatActivity implements CreateEven
     }
 
     @Override
-    public void nextStep(String title, String type, String privacy, Calendar calendar, String date, String time, String place, String description) {
-        mEvent.setTitle(title);
-        mEvent.setType(EnumUtils.convertStringToEventType(type));
-        mEvent.setPrivacy(EnumUtils.convertStringToPrivacy(privacy));
-        mEvent.setDescription(description);
-        mEvent.setDateTime(calendar.getTimeInMillis());
-        mEvent.setDateString(date);
-        mEvent.setTimeString(time);
-        mEvent.setPlace(place);
-
-
+    public void nextStep(SoftEvent event) {
+        mEvent = event;
         nextPage(mViewPager.getCurrentItem());
     }
 
@@ -71,9 +57,9 @@ public class CreateEventActivity extends AppCompatActivity implements CreateEven
     public void nextStep() {
         int currentPosition = mViewPager.getCurrentItem();
         Fragment fragment = getSupportFragmentManager().getFragments().get(currentPosition + 1);
-        Fragment childFragment = fragment.getChildFragmentManager().findFragmentByTag(EventCardFragment.class.getSimpleName());
-        if (childFragment instanceof EventCardFragment) {
-            ((EventCardFragment) childFragment).updateEventCard(mEvent);
+        Fragment childFragment = fragment.getChildFragmentManager().findFragmentByTag(EventPreviewFragment.class.getSimpleName());
+        if (childFragment instanceof EventPreviewFragment) {
+            ((EventPreviewFragment) childFragment).updateEventCard(mEvent);
         }
         nextPage(currentPosition);
     }

@@ -3,10 +3,9 @@ package clappapp.club.clapp.model;
 import java.util.ArrayList;
 
 public class Club {
-    public Club() {
-    }
 
     private String mName;
+    /**/private int mLogoID;
     private long mID;
     private long mPresidentID;
     private ArrayList<Long> mMembers;
@@ -16,6 +15,14 @@ public class Club {
     private ArrayList<Long> mRequestList;
     //xEventClappers Lists
     private boolean mMemberListPublic;
+
+    public Club() {
+    }
+
+    public Club(String name, int logoID) {
+        mName = name;
+        mLogoID = logoID;
+    }
 
 
     public String getName() {
@@ -90,7 +97,13 @@ public class Club {
         this.mMemberListPublic = memberListPublic;
     }
 
+    public int getLogoID() {
+        return mLogoID;
+    }
 
+    public void setLogoID(int logoID) {
+        this.mLogoID = logoID;
+    }
 }
 
 

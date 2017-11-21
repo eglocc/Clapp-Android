@@ -2,6 +2,7 @@ package clappapp.club.clapp.controller;
 
 import android.databinding.DataBindingUtil;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,10 +38,12 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private final EventAdapter.OnClickListener mOnClickListener;
     private ArrayList<SoftEvent> mEvents;
+    private boolean mShowHeader;
 
-    public EventAdapter(EventAdapter.OnClickListener handler, ArrayList<SoftEvent> events) {
-        mOnClickListener = handler;
+    public EventAdapter(EventAdapter.OnClickListener onClickListener, ArrayList<SoftEvent> events, boolean showHeader) {
+        mOnClickListener = onClickListener;
         mEvents = events;
+        mShowHeader = showHeader;
     }
 
     public final ArrayList<SoftEvent> getEvents() {
@@ -50,26 +53,29 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_list_item, parent, false);
-        return new EventCardViewHolder(view);
+        return new EventCardWithHeaderViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof EventCardViewHolder) {
+        if (holder instanceof EventCardWithHeaderViewHolder) {
             SoftEvent event = getItem(position);
 
-            ((EventCardViewHolder) holder).mClubName.setText(event.getClubName());
-            ((EventCardViewHolder) holder).mClubIcon.setImageResource(event.getClubIcon());
-
-            Enums.Privacy privacy = event.getPrivacy();
-            ((EventCardViewHolder) holder).mPrivacyLabel.setText(privacy.toString());
-            ((EventCardViewHolder) holder).mPrivacyLabel.setCompoundDrawablesWithIntrinsicBounds(sPrivacyMap.get(privacy), 0, 0, 0);
-            ((EventCardViewHolder) holder).mEventTitle.setText(event.getTitle());
-            ((EventCardViewHolder) holder).mEventDescription.setText(event.getDescription());
-            ((EventCardViewHolder) holder).mEventImage.setImageResource(event.getImageLink());
-            ((EventCardViewHolder) holder).mEventDate.setText(event.getDateString());
-            ((EventCardViewHolder) holder).mEventTime.setText(event.getTimeString());
-            ((EventCardViewHolder) holder).mEventPlace.setText(event.getPlace());
+            if (mShowHeader) {
+                ((EventCardWithHeaderViewHolder) holder).mClubName.setText(event.getClubName());
+                ((EventCardWithHeaderViewHolder) holder).mClubIcon.setImageResource(event.getClubIcon());
+                Enums.Privacy privacy = event.getPrivacy();
+                ((EventCardWithHeaderViewHolder) holder).mPrivacyLabel.setText(privacy.toString());
+                ((EventCardWithHeaderViewHolder) holder).mPrivacyLabel.setCompoundDrawablesWithIntrinsicBounds(sPrivacyMap.get(privacy), 0, 0, 0);
+            } else {
+                ((EventCardWithHeaderViewHolder) holder).mHeaderCard.setVisibility(View.GONE);
+            }
+            ((EventCardWithHeaderViewHolder) holder).mEventTitle.setText(event.getTitle());
+            ((EventCardWithHeaderViewHolder) holder).mEventDescription.setText(event.getDescription());
+            ((EventCardWithHeaderViewHolder) holder).mEventImage.setImageResource(event.getImageLink());
+            ((EventCardWithHeaderViewHolder) holder).mEventDate.setText(event.getDateString());
+            ((EventCardWithHeaderViewHolder) holder).mEventTime.setText(event.getTimeString());
+            ((EventCardWithHeaderViewHolder) holder).mEventPlace.setText(event.getPlace());
         }
     }
 
@@ -82,11 +88,12 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return mEvents.get(position);
     }
 
-    public class EventCardViewHolder extends RecyclerView.ViewHolder {
+    public class EventCardWithHeaderViewHolder extends RecyclerView.ViewHolder {
 
         private EventListItemBinding mBinding;
 
         //Preview UI
+        private CardView mHeaderCard;
         private ImageView mClubIcon;
         private TextView mClubName;
         private TextView mPrivacyLabel;
@@ -98,10 +105,11 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         private TextView mEventPlace;
         private FloatingActionButton mAddCalendarButton;
 
-        public EventCardViewHolder(View itemView) {
+        public EventCardWithHeaderViewHolder(View itemView) {
             super(itemView);
             mBinding = DataBindingUtil.bind(itemView);
 
+            mHeaderCard = mBinding.headerCard;
             mClubIcon = mBinding.header.clubLogo;
             mClubName = mBinding.header.clubName;
             mPrivacyLabel = mBinding.header.privacyLabel;

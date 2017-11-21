@@ -17,7 +17,7 @@
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".controller.CreateEventActivity"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".controller.AuthActivity"
             android:windowSoftInputMode="stateHidden">
@@ -27,7 +27,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controller.MainActivity"></activity>
+        <activity android:name=".controller.MainActivity" />
+        <activity
+            android:name=".controller.ClubDetailActivity"
+            android:parentActivityName=".controller.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".controller.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

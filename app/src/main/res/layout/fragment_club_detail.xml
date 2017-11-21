@@ -1,0 +1,132 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/club_details_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsing_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="@dimen/default_vertical_margin"
+                        android:paddingStart="@dimen/default_vertical_margin"
+                        android:paddingTop="@dimen/default_vertical_margin"
+                        tools:context="clappapp.club.clapp.controller.ClubDetailFragment">
+
+                        <ImageView
+                            android:id="@+id/club_logo"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:layout_marginEnd="@dimen/default_horizontal_margin"
+                            android:layout_marginRight="@dimen/default_horizontal_margin"
+                            app:layout_constraintBottom_toBottomOf="@+id/future_events_number"
+                            app:layout_constraintEnd_toStartOf="@+id/club_name"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/club_name"
+                            tools:src="@mipmap/icon_ies_round" />
+
+                        <TextView
+                            android:id="@+id/club_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="4dp"
+                            android:paddingTop="4dp"
+                            android:textSize="@dimen/default_sub_head_size"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/club_logo"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="Some Club" />
+
+                        <TextView
+                            android:id="@+id/club_follower_number"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="4dp"
+                            android:paddingTop="4dp"
+                            android:text="@string/follower_number_label"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@id/club_name"
+                            app:layout_constraintTop_toBottomOf="@id/club_name" />
+
+                        <TextView
+                            android:id="@+id/club_member_number"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="4dp"
+                            android:paddingTop="4dp"
+                            android:text="@string/member_number_label"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@id/club_name"
+                            app:layout_constraintTop_toBottomOf="@id/club_follower_number" />
+
+                        <TextView
+                            android:id="@+id/total_events_number"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="4dp"
+                            android:paddingEnd="4dp"
+                            android:paddingRight="4dp"
+                            android:paddingTop="4dp"
+                            android:text="@string/total_events_number_label"
+                            app:layout_constraintEnd_toStartOf="@+id/change_events_view"
+                            app:layout_constraintStart_toStartOf="@id/club_name"
+                            app:layout_constraintTop_toBottomOf="@id/club_member_number" />
+
+                        <TextView
+                            android:id="@+id/future_events_number"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="4dp"
+                            android:paddingEnd="4dp"
+                            android:paddingRight="4dp"
+                            android:paddingTop="4dp"
+                            android:text="@string/upcoming_events_number_label"
+                            app:layout_constraintEnd_toStartOf="@id/change_events_view"
+                            app:layout_constraintStart_toStartOf="@id/club_name"
+                            app:layout_constraintTop_toBottomOf="@id/total_events_number" />
+
+                        <android.support.design.widget.FloatingActionButton
+                            android:id="@+id/change_events_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/format_list_bulleted_white"
+                            app:backgroundTint="@color/colorPrimary"
+                            app:fabSize="mini"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent" />
+
+                    </android.support.constraint.ConstraintLayout>
+
+                </android.support.v7.widget.CardView>
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/child_fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</layout>

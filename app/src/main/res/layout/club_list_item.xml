@@ -1,72 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingTop="@dimen/default_vertical_margin"
-    android:paddingBottom="@dimen/default_vertical_margin"
-    android:paddingStart="@dimen/default_horizontal_margin"
-    android:paddingEnd="@dimen/default_horizontal_margin">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/club_logo"
-        android:layout_width="wrap_content"
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:src="@mipmap/ic_launcher_round"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:paddingBottom="@dimen/default_vertical_margin"
+        android:paddingEnd="@dimen/default_horizontal_margin"
+        android:paddingStart="@dimen/default_horizontal_margin"
+        android:paddingTop="@dimen/default_vertical_margin">
 
-    <TextView
-        android:id="@+id/club_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/default_horizontal_margin"
-        android:layout_marginStart="@dimen/default_horizontal_margin"
-        android:textStyle="bold"
-        tools:text="Some Club"
-        android:gravity="center"
-        app:layout_constraintLeft_toRightOf="@id/club_logo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/default_horizontal_margin"
-        android:layout_marginStart="@dimen/default_horizontal_margin"
-        app:layout_constraintLeft_toRightOf="@id/club_name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_chainStyle="spread_inside"
-        app:layout_constraintTop_toTopOf="parent">
+        <ImageView
+            android:id="@+id/club_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@mipmap/icon_ies_round" />
 
         <TextView
-            android:id="@+id/club_follower_number"
-            android:layout_width="match_parent"
+            android:id="@+id/club_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/follower_number_label" />
+            android:layout_marginLeft="@dimen/default_horizontal_margin"
+            android:layout_marginStart="@dimen/default_horizontal_margin"
+            android:textSize="@dimen/default_sub_head_size"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/club_logo"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Some Club" />
 
-        <TextView
-            android:id="@+id/club_event_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/member_number_label" />
+        <ImageView
+            android:id="@+id/follow_button"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/plus_box_outline"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 
-    <ImageButton
-        android:id="@+id/edit_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/plus_box_outline"
-        android:background="@android:color/transparent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-</android.support.constraint.ConstraintLayout>
+</layout>

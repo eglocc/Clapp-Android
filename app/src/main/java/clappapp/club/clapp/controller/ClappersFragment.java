@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import clappapp.club.clapp.R;
-import clappapp.club.clapp.databinding.FragmentClappersBinding;
+import clappapp.club.clapp.databinding.FragmentRecyclerBinding;
 import clappapp.club.clapp.model.SoftUser;
 
 /**
@@ -30,7 +30,7 @@ public class ClappersFragment extends DialogFragment implements ClappersAdapter.
 
     private static final String CLAPPERS_LIST = "clappers_list";
 
-    private FragmentClappersBinding mBinding;
+    private FragmentRecyclerBinding mBinding;
 
     private SearchView mSearchView;
     private RecyclerView mClappersRecycler;
@@ -56,9 +56,9 @@ public class ClappersFragment extends DialogFragment implements ClappersAdapter.
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_clappers, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_recycler, container, false);
         mSearchView = mBinding.searchView;
-        mClappersRecycler = mBinding.clappersRecycler;
+        mClappersRecycler = mBinding.recyclerView;
         mEmptyViewText = getArguments().getString(EMPTY_VIEW_TEXT);
 
         mClappMembers = (ArrayList<SoftUser>) getArguments().getSerializable(CLAPPERS_LIST);
