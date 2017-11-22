@@ -41,7 +41,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
     private static final String TAG = CreateEventFragment.class.getSimpleName();
     private static final String INTERFACE_TAG = Callbacks.class.getSimpleName();
     private static final String CLAPPERS_FRAGMENT_TAG = ClappersFragment.class.getSimpleName();
-    private static final String EVENT_CARD_FRAGMENT_TAG = EventPreviewFragment.class.getSimpleName();
+    private static final String EVENT_CARD_FRAGMENT_TAG = SingleEventFragment.class.getSimpleName();
     private static final String LAYOUT_TAG = "layoutID";
 
     interface Callbacks {
@@ -318,7 +318,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         mActionButton = ((FragmentCreateEventStep3Binding) mBinding).actionButton;
 
         if (savedInstanceState == null) {
-            EventPreviewFragment fragment = new EventPreviewFragment();
+            SingleEventFragment fragment = SingleEventFragment.newInstance(true);
             getChildFragmentManager().beginTransaction()
                     .replace(R.id.event_card_container, fragment, EVENT_CARD_FRAGMENT_TAG)
                     .commit();

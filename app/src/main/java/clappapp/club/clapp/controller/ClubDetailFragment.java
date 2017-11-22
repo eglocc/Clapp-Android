@@ -18,7 +18,7 @@ import clappapp.club.clapp.model.SoftClub;
 public class ClubDetailFragment extends Fragment {
 
     private static final String TAG = ClubDetailFragment.class.getSimpleName();
-    private static final String CHILD_FRAGMENT_TAG = EventDisplayerFragment.class.getSimpleName();
+    private static final String CHILD_FRAGMENT_TAG = EventListFragment.class.getSimpleName();
     private static final String CLUB_TAG = "club";
 
     private FragmentClubDetailBinding mBinding;
@@ -46,7 +46,7 @@ public class ClubDetailFragment extends Fragment {
         mBinding.clubName.setText(mClub.getName());
         mBinding.clubLogo.setImageResource(mClub.getLogoID());
 
-        EventDisplayerFragment fragment = EventDisplayerFragment.newInstance(mClub.getEvents(), false);
+        EventListFragment fragment = EventListFragment.newInstance(mClub.getEvents(), false);
         getChildFragmentManager().beginTransaction().replace(R.id.child_fragment_container, fragment, CHILD_FRAGMENT_TAG).commit();
         return mBinding.getRoot();
     }

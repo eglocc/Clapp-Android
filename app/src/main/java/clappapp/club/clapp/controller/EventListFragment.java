@@ -19,35 +19,39 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import clappapp.club.clapp.R;
-import clappapp.club.clapp.databinding.FragmentEventDisplayerBinding;
+import clappapp.club.clapp.databinding.FragmentEventListBinding;
 import clappapp.club.clapp.model.SoftEvent;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EventDisplayerFragment extends Fragment implements EventAdapter.OnClickListener {
+public class EventListFragment extends Fragment implements EventAdapter.OnClickListener {
+
+    private static final String TAG = EventListFragment.class.getSimpleName();
 
     private static final String EVENT_LIST_TAG = "event_list";
     private static final String SHOW_HEADER_TAG = "show_header";
+    private static final String EVENT_POSITION_TAG = "event_position";
+    private static final String EVENT_ID_TAG = "eventID";
 
-    private FragmentEventDisplayerBinding mBinding;
+    private FragmentEventListBinding mBinding;
     private RecyclerView mEventRecycler;
     private EventAdapter mEventAdapter;
     private TextView mEmptyView;
     private ArrayList<SoftEvent> mEvents;
     private boolean mShowHeader;
 
-    public EventDisplayerFragment() {
+    public EventListFragment() {
         // Required empty public constructor
     }
 
-    public static EventDisplayerFragment newInstance(ArrayList<SoftEvent> events, boolean showHeader) {
+    public static EventListFragment newInstance(ArrayList<SoftEvent> events, boolean showHeader) {
 
         Bundle args = new Bundle();
         args.putSerializable(EVENT_LIST_TAG, events);
         args.putBoolean(SHOW_HEADER_TAG, showHeader);
 
-        EventDisplayerFragment fragment = new EventDisplayerFragment();
+        EventListFragment fragment = new EventListFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -61,7 +65,7 @@ public class EventDisplayerFragment extends Fragment implements EventAdapter.OnC
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_event_displayer, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_event_list, container, false);
         mEventRecycler = mBinding.eventRecycler;
         mEmptyView = mBinding.emptyView;
 
@@ -109,6 +113,14 @@ public class EventDisplayerFragment extends Fragment implements EventAdapter.OnC
 
     @Override
     public void eventClicked(View v, int position, long id) {
+        Intent intent = new Intent(getActivity(), EventDetailActivity.class);
+        intent.putExtra(EVENT_POSITION_TAG, position);
+        intent.putExtra(EVENT_ID_TAG, id);
+        startActivity(intent);
+    }
+
+    @Override
+    public void eventFollowed(View v, int position, long id) {
 
     }
 }

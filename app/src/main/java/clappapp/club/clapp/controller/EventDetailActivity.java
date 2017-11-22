@@ -7,16 +7,17 @@ import android.view.MenuItem;
 
 import clappapp.club.clapp.R;
 import clappapp.club.clapp.model.DataHelper;
-import clappapp.club.clapp.model.SoftClub;
+import clappapp.club.clapp.model.SoftEvent;
 
-public class ClubDetailActivity extends AppCompatActivity {
+public class EventDetailActivity extends AppCompatActivity {
 
-    private static final String TAG = ClubDetailActivity.class.getSimpleName();
-    private static final String FRAGMENT_TAG = ClubDetailFragment.class.getSimpleName();
-    private static final String CLUB_ID_TAG = "clubID";
+    private static final String TAG = EventDetailActivity.class.getSimpleName();
+    private static final String FRAGMENT_TAG = SingleEventFragment.class.getSimpleName();
+    private static final String EVENT_POSITION_TAG = "event_position";
+    private static final String EVENT_ID_TAG = "eventID";
 
     private DataHelper mDataHelper;
-    private SoftClub mClub;
+    private SoftEvent mEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +25,11 @@ public class ClubDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         mDataHelper = DataHelper.getInstance();
-        int position = getIntent().getExtras().getInt(CLUB_ID_TAG);
-        mClub = mDataHelper.getFakeClubs().get(position);
-        if (mClub != null) {
-            ClubDetailFragment fragment = ClubDetailFragment.newInstance(mClub);
+        int position = getIntent().getExtras().getInt(EVENT_POSITION_TAG);
+        mEvent = mDataHelper.getFakeEvents().get(position);
+
+        if (mEvent != null) {
+            SingleEventFragment fragment = SingleEventFragment.newInstance(mEvent, false);
             getSupportFragmentManager().beginTransaction().replace(R.id.detail_fragment_container, fragment, FRAGMENT_TAG).commit();
         }
     }

@@ -57,9 +57,9 @@ public class CreateEventActivity extends AppCompatActivity implements CreateEven
     public void nextStep() {
         int currentPosition = mViewPager.getCurrentItem();
         Fragment fragment = getSupportFragmentManager().getFragments().get(currentPosition + 1);
-        Fragment childFragment = fragment.getChildFragmentManager().findFragmentByTag(EventPreviewFragment.class.getSimpleName());
-        if (childFragment instanceof EventPreviewFragment) {
-            ((EventPreviewFragment) childFragment).updateEventCard(mEvent);
+        Fragment childFragment = fragment.getChildFragmentManager().findFragmentByTag(SingleEventFragment.class.getSimpleName());
+        if (childFragment instanceof SingleEventFragment) {
+            ((SingleEventFragment) childFragment).updateEventCard(mEvent);
         }
         nextPage(currentPosition);
     }

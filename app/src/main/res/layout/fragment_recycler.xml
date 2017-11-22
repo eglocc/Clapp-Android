@@ -18,6 +18,16 @@
             android:scrollbars="vertical"
             android:overScrollMode="never" />
 
+        <TextView
+            android:id="@+id/empty_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:drawableTop="@drawable/do_not_disturb"
+            android:textSize="@dimen/default_head_size"
+            android:textStyle="bold"
+            android:visibility="invisible" />
+
     </RelativeLayout>
 
 </layout>

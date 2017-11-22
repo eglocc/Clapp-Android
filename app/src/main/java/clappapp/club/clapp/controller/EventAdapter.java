@@ -15,6 +15,7 @@ import java.util.HashMap;
 
 import clappapp.club.clapp.R;
 import clappapp.club.clapp.databinding.EventListItemBinding;
+import clappapp.club.clapp.model.DataHelper;
 import clappapp.club.clapp.model.Enums;
 import clappapp.club.clapp.model.SoftEvent;
 
@@ -22,25 +23,19 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     private static final String TAG = EventAdapter.class.getSimpleName();
 
-    private static final HashMap<Enums.Privacy, Integer> sPrivacyMap = new HashMap<>();
-
-    static {
-        sPrivacyMap.put(Enums.Privacy.GLOBAL, R.drawable.earth);
-        sPrivacyMap.put(Enums.Privacy.LOCAL, R.drawable.school);
-        sPrivacyMap.put(Enums.Privacy.CLUB, R.drawable.club_privacy);
-        sPrivacyMap.put(Enums.Privacy.GROUP, R.drawable.group_privacy);
-        sPrivacyMap.put(Enums.Privacy.PRIVATE, R.drawable.custom_privacy);
-    }
-
     interface OnClickListener {
         void eventClicked(View v, int position, long id);
+
+        void eventFollowed(View v, int position, long id);
     }
 
+    private DataHelper mDataHelper;
     private final EventAdapter.OnClickListener mOnClickListener;
     private ArrayList<SoftEvent> mEvents;
     private boolean mShowHeader;
 
     public EventAdapter(EventAdapter.OnClickListener onClickListener, ArrayList<SoftEvent> events, boolean showHeader) {
+        mDataHelper = DataHelper.getInstance();
         mOnClickListener = onClickListener;
         mEvents = events;
         mShowHeader = showHeader;
@@ -53,29 +48,31 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_list_item, parent, false);
-        return new EventCardWithHeaderViewHolder(view);
+        return new EventCardViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof EventCardWithHeaderViewHolder) {
+        if (holder instanceof EventCardViewHolder) {
             SoftEvent event = getItem(position);
+            HashMap<Enums.Privacy, Integer> logoMap = mDataHelper.getPrivacyLogoMap();
 
             if (mShowHeader) {
-                ((EventCardWithHeaderViewHolder) holder).mClubName.setText(event.getClubName());
-                ((EventCardWithHeaderViewHolder) holder).mClubIcon.setImageResource(event.getClubIcon());
+                ((EventCardViewHolder) holder).mClubName.setText(event.getClubName());
+                ((EventCardViewHolder) holder).mClubIcon.setImageResource(event.getClubIcon());
                 Enums.Privacy privacy = event.getPrivacy();
-                ((EventCardWithHeaderViewHolder) holder).mPrivacyLabel.setText(privacy.toString());
-                ((EventCardWithHeaderViewHolder) holder).mPrivacyLabel.setCompoundDrawablesWithIntrinsicBounds(sPrivacyMap.get(privacy), 0, 0, 0);
+                ((EventCardViewHolder) holder).mPrivacyLabel.setText(privacy.toString());
+                ((EventCardViewHolder) holder).mPrivacyLabel
+                        .setCompoundDrawablesWithIntrinsicBounds(logoMap.get(privacy), 0, 0, 0);
             } else {
-                ((EventCardWithHeaderViewHolder) holder).mHeaderCard.setVisibility(View.GONE);
+                ((EventCardViewHolder) holder).mHeaderCard.setVisibility(View.GONE);
             }
-            ((EventCardWithHeaderViewHolder) holder).mEventTitle.setText(event.getTitle());
-            ((EventCardWithHeaderViewHolder) holder).mEventDescription.setText(event.getDescription());
-            ((EventCardWithHeaderViewHolder) holder).mEventImage.setImageResource(event.getImageLink());
-            ((EventCardWithHeaderViewHolder) holder).mEventDate.setText(event.getDateString());
-            ((EventCardWithHeaderViewHolder) holder).mEventTime.setText(event.getTimeString());
-            ((EventCardWithHeaderViewHolder) holder).mEventPlace.setText(event.getPlace());
+            ((EventCardViewHolder) holder).mEventTitle.setText(event.getTitle());
+            ((EventCardViewHolder) holder).mEventDescription.setText(event.getDescription());
+            ((EventCardViewHolder) holder).mEventImage.setImageResource(event.getImageLink());
+            ((EventCardViewHolder) holder).mEventDate.setText(event.getDateString());
+            ((EventCardViewHolder) holder).mEventTime.setText(event.getTimeString());
+            ((EventCardViewHolder) holder).mEventPlace.setText(event.getPlace());
         }
     }
 
@@ -88,7 +85,7 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return mEvents.get(position);
     }
 
-    public class EventCardWithHeaderViewHolder extends RecyclerView.ViewHolder {
+    public class EventCardViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private EventListItemBinding mBinding;
 
@@ -105,7 +102,7 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         private TextView mEventPlace;
         private FloatingActionButton mAddCalendarButton;
 
-        public EventCardWithHeaderViewHolder(View itemView) {
+        public EventCardViewHolder(View itemView) {
             super(itemView);
             mBinding = DataBindingUtil.bind(itemView);
 
@@ -120,6 +117,20 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             mEventTime = mBinding.footer.time;
             mEventPlace = mBinding.footer.eventPlace;
             mAddCalendarButton = mBinding.footer.addCalendarButton;
+
+            mAddCalendarButton.setOnClickListener(this);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            switch (v.getId()) {
+                case R.id.add_calendar_button:
+                    mOnClickListener.eventFollowed(v, position, mEvents.get(position).getID());
+                default:
+                    mOnClickListener.eventClicked(v, position, mEvents.get(position).getID());
+            }
         }
     }
 }

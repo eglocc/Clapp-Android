@@ -24,13 +24,13 @@ public class MainPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return EventDisplayerFragment.newInstance(mEvents, true);
+                return EventListFragment.newInstance(mEvents, true);
             case 1:
-                return EventDisplayerFragment.newInstance(mEvents, true);
+                return EventListFragment.newInstance(mEvents, true);
             case 2:
                 return ClubListFragment.newInstance(mClubs);
             default:
-                return EventDisplayerFragment.newInstance(mEvents, true);
+                return EventListFragment.newInstance(mEvents, true);
         }
     }
 

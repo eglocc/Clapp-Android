@@ -1,6 +1,7 @@
 package clappapp.club.clapp.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import clappapp.club.clapp.R;
 
@@ -10,6 +11,7 @@ public class DataHelper {
     private ArrayList<SoftEvent> mFakeEvents;
     private ArrayList<SoftClub> mFakeClubs;
     private ArrayList<SoftUser> mFakeMembers;
+    private HashMap<Enums.Privacy, Integer> mPrivacyLogoMap;
 
     public static DataHelper getInstance() {
         return ourInstance;
@@ -19,6 +21,7 @@ public class DataHelper {
         initFakeEvents();
         initFakeClubs();
         initFakeMembers();
+        initPrivacyLogoMap();
     }
 
     private void initFakeEvents() {
@@ -103,6 +106,15 @@ public class DataHelper {
         mFakeMembers.add(new SoftUser("Said Bilal Karslı"));
     }
 
+    private void initPrivacyLogoMap() {
+        mPrivacyLogoMap = new HashMap<>();
+        mPrivacyLogoMap.put(Enums.Privacy.GLOBAL, R.drawable.earth);
+        mPrivacyLogoMap.put(Enums.Privacy.LOCAL, R.drawable.school);
+        mPrivacyLogoMap.put(Enums.Privacy.CLUB, R.drawable.club_privacy);
+        mPrivacyLogoMap.put(Enums.Privacy.GROUP, R.drawable.group_privacy);
+        mPrivacyLogoMap.put(Enums.Privacy.PRIVATE, R.drawable.custom_privacy);
+    }
+
     public final ArrayList<SoftEvent> getFakeEvents() {
         return mFakeEvents;
     }
@@ -113,5 +125,9 @@ public class DataHelper {
 
     public final ArrayList<SoftUser> getFakeMembers() {
         return mFakeMembers;
+    }
+
+    public final HashMap<Enums.Privacy, Integer> getPrivacyLogoMap() {
+        return mPrivacyLogoMap;
     }
 }

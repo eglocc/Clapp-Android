@@ -12,7 +12,7 @@
             android:id="@+id/club_logo"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@mipmap/ic_launcher_round" />
+            tools:src="@mipmap/ic_launcher_round" />
 
         <TextView
             android:id="@+id/club_name"

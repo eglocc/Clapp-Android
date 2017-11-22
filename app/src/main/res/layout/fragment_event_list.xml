@@ -5,7 +5,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="clappapp.club.clapp.controller.EventDisplayerFragment">
+        tools:context="clappapp.club.clapp.controller.EventListFragment">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/event_recycler"

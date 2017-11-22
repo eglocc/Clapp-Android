@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -36,6 +37,7 @@ public class ClappersFragment extends DialogFragment implements ClappersAdapter.
     private RecyclerView mClappersRecycler;
     private ClappersAdapter mClappersAdapter;
     private ArrayList<SoftUser> mClappMembers;
+    private TextView mEmptyView;
     private String mEmptyViewText;
 
     public ClappersFragment() {
@@ -59,21 +61,38 @@ public class ClappersFragment extends DialogFragment implements ClappersAdapter.
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_recycler, container, false);
         mSearchView = mBinding.searchView;
         mClappersRecycler = mBinding.recyclerView;
-        mEmptyViewText = getArguments().getString(EMPTY_VIEW_TEXT);
+        mEmptyView = mBinding.emptyView;
 
+        mEmptyViewText = getArguments().getString(EMPTY_VIEW_TEXT);
         mClappMembers = (ArrayList<SoftUser>) getArguments().getSerializable(CLAPPERS_LIST);
+
+        mEmptyView.setText(mEmptyViewText);
 
         mClappersRecycler.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         mClappersRecycler.setLayoutManager(layoutManager);
-        mClappersAdapter = new ClappersAdapter(this, mClappMembers, mEmptyViewText);
+        mClappersAdapter = new ClappersAdapter(this, mClappMembers);
         mClappersRecycler.setAdapter(mClappersAdapter);
+
+        if (mClappMembers.size() == 0) showEmptyView();
+        else showEventData();
+
         return mBinding.getRoot();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putSerializable(CLAPPERS_LIST, mClappersAdapter.getClappers());
+    }
+
+    public void showEventData() {
+        mEmptyView.setVisibility(View.INVISIBLE);
+        mClappersRecycler.setVisibility(View.VISIBLE);
+    }
+
+    public void showEmptyView() {
+        mClappersRecycler.setVisibility(View.INVISIBLE);
+        mEmptyView.setVisibility(View.VISIBLE);
     }
 
     @Override

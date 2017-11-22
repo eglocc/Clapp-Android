@@ -11,7 +11,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import clappapp.club.clapp.R;
-import clappapp.club.clapp.databinding.ContactsEmptyViewBinding;
 import clappapp.club.clapp.databinding.MemberListItemBinding;
 import clappapp.club.clapp.model.SoftUser;
 import clappapp.club.clapp.model.User;
@@ -20,21 +19,16 @@ public class ClappersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private static final String TAG = ClappersAdapter.class.getSimpleName();
 
-    private static final int EMPTY_VIEW = 22;
-    private static final int ITEM_VIEW = 23;
-
     interface OnClickListener {
         void clapperClicked(View v, int position);
     }
 
     private final ClappersAdapter.OnClickListener mOnClickListener;
-    private String mEmptyViewText;
     private ArrayList<SoftUser> mClappers;
 
-    public ClappersAdapter(ClappersAdapter.OnClickListener onClickListener, ArrayList<SoftUser> clappers, String emptyViewText) {
+    public ClappersAdapter(ClappersAdapter.OnClickListener onClickListener, ArrayList<SoftUser> clappers) {
         mOnClickListener = onClickListener;
         mClappers = clappers;
-        mEmptyViewText = emptyViewText;
     }
 
     public final ArrayList<SoftUser> getClappers() {
@@ -52,23 +46,15 @@ public class ClappersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view;
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        if (viewType == EMPTY_VIEW) {
-            view = inflater.inflate(R.layout.contacts_empty_view, parent, false);
-            return new ClappersAdapterEmptyViewHolder(view);
-        } else {
-            view = inflater.inflate(R.layout.member_list_item, parent, false);
-            return new ClappersAdapterItemViewHolder(view);
-        }
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.member_list_item, parent, false);
+        return new ClappersAdapterItemViewHolder(view);
+
     }
 
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof ClappersAdapterEmptyViewHolder) {
-            ((ClappersAdapterEmptyViewHolder) holder).mEmptyViewAlert.setText(mEmptyViewText);
-        } else if (holder instanceof ClappersAdapterItemViewHolder) {
+        if (holder instanceof ClappersAdapterItemViewHolder) {
             User user = getItem(position);
             ((ClappersAdapterItemViewHolder) holder).mClapperPicture.setImageResource(R.mipmap.ic_launcher_round);
             ((ClappersAdapterItemViewHolder) holder).mClapperName.setText(user.getName() /*+ " " + user.getSurname()*/);
@@ -78,36 +64,11 @@ public class ClappersAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
-        int dataSize = mClappers.size();
-        if (dataSize > 0) {
-            return dataSize;
-        } else {
-            return 1;
-        }
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        if (position == 0)
-            return mClappers.size() == 0 ? EMPTY_VIEW : ITEM_VIEW;
-
-        return super.getItemViewType(position);
+        return mClappers.size();
     }
 
     private User getItem(int position) {
         return mClappers.get(position);
-    }
-
-    public class ClappersAdapterEmptyViewHolder extends RecyclerView.ViewHolder {
-
-        private ContactsEmptyViewBinding mBinding;
-        private TextView mEmptyViewAlert;
-
-        public ClappersAdapterEmptyViewHolder(View itemView) {
-            super(itemView);
-            mBinding = DataBindingUtil.bind(itemView);
-            mEmptyViewAlert = mBinding.noContactsText;
-        }
     }
 
     //ItemViewHolder
