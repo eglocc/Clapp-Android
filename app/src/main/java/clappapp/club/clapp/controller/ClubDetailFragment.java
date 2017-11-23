@@ -3,6 +3,7 @@ package clappapp.club.clapp.controller;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,15 +40,24 @@ public class ClubDetailFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mClub = (SoftClub) getArguments().getSerializable(CLUB_TAG);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_club_detail, container, false);
-        mClub = (SoftClub) getArguments().getSerializable(CLUB_TAG);
-        mBinding.clubName.setText(mClub.getName());
-        mBinding.clubLogo.setImageResource(mClub.getLogoID());
+        if (mClub != null) {
+            mBinding.clubName.setText(mClub.getName());
+            mBinding.clubLogo.setImageResource(mClub.getLogoID());
 
-        EventListFragment fragment = EventListFragment.newInstance(mClub.getEvents(), false);
-        getChildFragmentManager().beginTransaction().replace(R.id.child_fragment_container, fragment, CHILD_FRAGMENT_TAG).commit();
+            if (savedInstanceState == null) {
+                EventListFragment fragment = EventListFragment.newInstance(mClub.getEvents(), getString(R.string.no_events), false);
+                getChildFragmentManager().beginTransaction().replace(R.id.child_fragment_container, fragment, CHILD_FRAGMENT_TAG).commit();
+            }
+        }
         return mBinding.getRoot();
     }
 

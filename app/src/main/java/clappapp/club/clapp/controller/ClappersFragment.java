@@ -2,7 +2,9 @@ package clappapp.club.clapp.controller;
 
 
 import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 
 import clappapp.club.clapp.R;
 import clappapp.club.clapp.databinding.FragmentRecyclerBinding;
+import clappapp.club.clapp.databinding.FragmentSearchableRecyclerBinding;
 import clappapp.club.clapp.model.SoftUser;
 
 /**
@@ -26,12 +29,11 @@ import clappapp.club.clapp.model.SoftUser;
 public class ClappersFragment extends DialogFragment implements ClappersAdapter.OnClickListener {
 
     private static final String TAG = ClappersFragment.class.getSimpleName();
-
+    private static final String LAYOUT_ID_TAG = "layoutID";
     private static final String EMPTY_VIEW_TEXT = "empty_view_text";
-
     private static final String CLAPPERS_LIST = "clappers_list";
 
-    private FragmentRecyclerBinding mBinding;
+    private ViewDataBinding mBinding;
 
     private SearchView mSearchView;
     private RecyclerView mClappersRecycler;
@@ -39,32 +41,48 @@ public class ClappersFragment extends DialogFragment implements ClappersAdapter.
     private ArrayList<SoftUser> mClappMembers;
     private TextView mEmptyView;
     private String mEmptyViewText;
+    private int mLayoutResourceID;
 
     public ClappersFragment() {
         // Required empty public constructor
     }
 
-    public static ClappersFragment newInstance(ArrayList<SoftUser> clappers, String emptyViewText) {
+    public static ClappersFragment newInstance(ArrayList<SoftUser> clappers, String emptyViewText, int layoutResourceID) {
 
         Bundle args = new Bundle();
         args.putSerializable(CLAPPERS_LIST, clappers);
         args.putString(EMPTY_VIEW_TEXT, emptyViewText);
+        args.putInt(LAYOUT_ID_TAG, layoutResourceID);
         ClappersFragment fragment = new ClappersFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Bundle args = getArguments();
+        mEmptyViewText = args.getString(EMPTY_VIEW_TEXT);
+        mClappMembers = (ArrayList<SoftUser>) args.getSerializable(CLAPPERS_LIST);
+        mLayoutResourceID = args.getInt(LAYOUT_ID_TAG);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        mBinding = DataBindingUtil.inflate(inflater, mLayoutResourceID, container, false);
 
-        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_recycler, container, false);
-        mSearchView = mBinding.searchView;
-        mClappersRecycler = mBinding.recyclerView;
-        mEmptyView = mBinding.emptyView;
-
-        mEmptyViewText = getArguments().getString(EMPTY_VIEW_TEXT);
-        mClappMembers = (ArrayList<SoftUser>) getArguments().getSerializable(CLAPPERS_LIST);
+        switch (mLayoutResourceID) {
+            case R.layout.fragment_searchable_recycler:
+                mSearchView = ((FragmentSearchableRecyclerBinding) mBinding).searchView;
+                mClappersRecycler = ((FragmentSearchableRecyclerBinding) mBinding).recyclerView;
+                mEmptyView = ((FragmentSearchableRecyclerBinding) mBinding).emptyView;
+                break;
+            case R.layout.fragment_recycler:
+                mClappersRecycler = ((FragmentRecyclerBinding) mBinding).recyclerView;
+                mEmptyView = ((FragmentRecyclerBinding) mBinding).emptyView;
+                break;
+        }
 
         mEmptyView.setText(mEmptyViewText);
 
@@ -97,8 +115,10 @@ public class ClappersFragment extends DialogFragment implements ClappersAdapter.
 
     @Override
     public void clapperClicked(View v, int position) {
-        int visibility = v.getVisibility();
-        v.setVisibility(visibility == View.GONE ? View.VISIBLE : View.GONE);
-        Log.d(TAG, "Clapper at position " + position + " clicked");
+        if (mLayoutResourceID == R.layout.fragment_searchable_recycler) {
+            int visibility = v.getVisibility();
+            v.setVisibility(visibility == View.GONE ? View.VISIBLE : View.GONE);
+            Log.d(TAG, "Clapper at position " + position + " clicked");
+        }
     }
 }

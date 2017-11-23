@@ -123,12 +123,12 @@ public class Event {
         this.mImageLink = imageLink;
     }
 
-    public long getClub() {
+    public long getClubID() {
         return mClubID;
     }
 
-    public void setClub(long club) {
-        this.mClubID = club;
+    public void setClubID(long clubID) {
+        this.mClubID = clubID;
     }
 
     public long getCreator() {

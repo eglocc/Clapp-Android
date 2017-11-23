@@ -6,10 +6,7 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardUseCompatPadding="true"
-        android:layout_marginTop="@dimen/default_vertical_margin"
-        android:layout_marginStart="@dimen/default_vertical_margin"
-        android:layout_marginEnd="@dimen/default_vertical_margin">
+        app:cardUseCompatPadding="true">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/event_card_layout"
@@ -24,6 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardElevation="4dp"
+                app:cardBackgroundColor="@color/cardview_light_background"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <include
@@ -38,14 +36,14 @@
                 android:id="@+id/body_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/header_card">
+                app:layout_constraintTop_toBottomOf="@id/header_card"
+                app:layout_constraintBottom_toBottomOf="parent">
 
                 <android.support.constraint.ConstraintLayout
                     android:id="@+id/body"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/default_vertical_margin"
-                    android:background="?attr/selectableItemBackground">
+                    android:paddingTop="@dimen/default_vertical_margin">
 
                     <TextView
                         android:id="@+id/event_title"
@@ -73,17 +71,14 @@
                         app:layout_constraintTop_toBottomOf="@id/event_title"
                         tools:text="@tools:sample/lorem/random" />
 
-                    <ImageView
+                    <FrameLayout
                         android:id="@+id/event_picture"
                         android:layout_width="0dp"
-                        android:layout_height="180dp"
-                        android:maxHeight="200dp"
-                        android:scaleType="centerInside"
+                        android:layout_height="wrap_content"
                         app:layout_constraintBottom_toTopOf="@+id/footer"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/event_description"
-                        tools:src="@drawable/ies_warmup_party" />
+                        app:layout_constraintTop_toBottomOf="@id/event_description" />
 
                     <include
                         android:id="@+id/footer"

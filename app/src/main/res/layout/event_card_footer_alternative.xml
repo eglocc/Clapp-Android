@@ -6,8 +6,8 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/default_horizontal_margin"
-        android:paddingTop="@dimen/default_horizontal_margin">
+        android:paddingTop="@dimen/default_vertical_margin"
+        android:paddingBottom="@dimen/default_vertical_margin">
 
         <ImageView
             android:id="@+id/calendar_blank"

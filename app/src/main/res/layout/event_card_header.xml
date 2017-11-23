@@ -6,7 +6,9 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/default_vertical_margin">
+        android:paddingTop="@dimen/default_vertical_margin"
+        android:paddingBottom="@dimen/default_vertical_margin"
+        android:background="?attr/selectableItemBackground">
 
         <ImageView
             android:id="@+id/club_logo"
@@ -17,7 +19,8 @@
         <TextView
             android:id="@+id/club_name"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
             android:maxLines="1"
             android:paddingEnd="@dimen/default_horizontal_margin"
             android:paddingStart="@dimen/default_horizontal_margin"

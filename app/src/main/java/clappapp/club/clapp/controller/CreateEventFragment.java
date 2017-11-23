@@ -42,7 +42,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
     private static final String INTERFACE_TAG = Callbacks.class.getSimpleName();
     private static final String CLAPPERS_FRAGMENT_TAG = ClappersFragment.class.getSimpleName();
     private static final String EVENT_CARD_FRAGMENT_TAG = SingleEventFragment.class.getSimpleName();
-    private static final String LAYOUT_TAG = "layoutID";
+    private static final String LAYOUT_ID_TAG = "layoutID";
 
     interface Callbacks {
         void nextStep(SoftEvent event);
@@ -73,7 +73,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
     private DataHelper mDataHelper;
     private Callbacks mCallback;
     private Calendar mCalendar;
-    private int mLayoutResourceId;
+    private int mLayoutResourceID;
 
     private FloatingActionButton mActionButton;
 
@@ -101,7 +101,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
 
         Bundle args = new Bundle();
 
-        args.putInt(LAYOUT_TAG, layoutResourceID);
+        args.putInt(LAYOUT_ID_TAG, layoutResourceID);
         CreateEventFragment fragment = new CreateEventFragment();
         fragment.setArguments(args);
         return fragment;
@@ -188,7 +188,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         mDataHelper = DataHelper.getInstance();
-        mLayoutResourceId = getArguments().getInt(LAYOUT_TAG);
+        mLayoutResourceID = getArguments().getInt(LAYOUT_ID_TAG);
         mCalendar = new GregorianCalendar();
     }
 
@@ -196,8 +196,8 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mBinding = DataBindingUtil
-                .inflate(inflater, mLayoutResourceId, container, false);
-        switch (mLayoutResourceId) {
+                .inflate(inflater, mLayoutResourceID, container, false);
+        switch (mLayoutResourceID) {
             case R.layout.fragment_create_event_step1:
                 initFirstStep();
                 break;
@@ -243,7 +243,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
                 timeFragment.show(getChildFragmentManager(), TimePickerFragment.TAG);
                 break;
             case R.id.action_button:
-                switch (mLayoutResourceId) {
+                switch (mLayoutResourceID) {
                     case R.layout.fragment_create_event_step1:
                         createEvent();
                         break;
@@ -307,7 +307,8 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         mActionButton = ((FragmentCreateEventStep2Binding) mBinding).actionButton;
 
         if (savedInstanceState == null) {
-            ClappersFragment fragment = ClappersFragment.newInstance(mDataHelper.getFakeMembers(), getString(R.string.no_contacts));
+            ClappersFragment fragment = ClappersFragment
+                    .newInstance(mDataHelper.getFakeMembers(), getString(R.string.no_contacts), R.layout.fragment_searchable_recycler);
             getChildFragmentManager().beginTransaction()
                     .replace(R.id.add_contacts_container, fragment, CLAPPERS_FRAGMENT_TAG)
                     .commit();
@@ -318,7 +319,7 @@ public class CreateEventFragment extends Fragment implements View.OnClickListene
         mActionButton = ((FragmentCreateEventStep3Binding) mBinding).actionButton;
 
         if (savedInstanceState == null) {
-            SingleEventFragment fragment = SingleEventFragment.newInstance(true);
+            SingleEventFragment fragment = SingleEventFragment.newInstance(R.layout.fragment_event_preview);
             getChildFragmentManager().beginTransaction()
                     .replace(R.id.event_card_container, fragment, EVENT_CARD_FRAGMENT_TAG)
                     .commit();

@@ -5,11 +5,14 @@ import java.util.ArrayList;
 
 public class SoftClub extends Club implements Serializable {
 
+    private static long sCount = 0;
     private ArrayList<SoftEvent> mEvents;
 
     public SoftClub(String name, int logoID, ArrayList<SoftEvent> events) {
         super(name, logoID);
-        mEvents = events;
+        setID(sCount);
+        setEvents(events);
+        sCount++;
     }
 
     public ArrayList<SoftEvent> getEvents() {
@@ -18,10 +21,15 @@ public class SoftClub extends Club implements Serializable {
 
     public void setEvents(ArrayList<SoftEvent> events) {
         this.mEvents = events;
+        for (SoftEvent event : events) {
+            event.setClubID(getID());
+        }
     }
 
     @Override
     public String toString() {
         return getName();
     }
+
+
 }

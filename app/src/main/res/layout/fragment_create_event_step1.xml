@@ -27,7 +27,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/event_title"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:inputType="textCapWords" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -150,7 +151,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/event_place"
-                        android:singleLine="true" />
+                        android:singleLine="true"
+                        android:inputType="textCapWords" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -189,7 +191,7 @@
                 android:id="@+id/action_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorPrimary"
+                app:backgroundTint="@color/colorPrimary"
                 android:src="@drawable/arrow_right_white"
                 app:fabSize="auto"
                 app:layout_constraintBottom_toBottomOf="parent"

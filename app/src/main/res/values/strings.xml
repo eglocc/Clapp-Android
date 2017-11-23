@@ -29,10 +29,18 @@
     <string name="other">Other</string>
     <string name="gender_prompt">Select gender</string>
 
+    <string name="main_feed">Main Feed</string>
+    <string name="personal_feed">Personal Feed</string>
+    <string name="club_search">Club Search</string>
+    <string name="calendar">Calendar</string>
+    <string name="user_profile">User Profile</string>
+
+    <string name="create_event_step_one_label">Set Event Details</string>
+    <string name="create_event_step_two_label">Set Event Contacts</string>
+    <string name="create_event_step_three_label">Preview Image</string>
     <string name="event_title">Title</string>
     <string name="event_description">Description</string>
     <string name="event_place">Place</string>
-
     <string name="event_type_prompt">Choose event type</string>
     <string name="conference">Conference</string>
     <string name="meeting">Meeting</string>
@@ -45,6 +53,7 @@
 
     <string name="next">Next</string>
     <string name="add_contacts_prompt">Add event coordinators here!</string>
+    <string name="contacts_label">Contacts</string>
     <string name="no_contacts">No contacts!</string>
     <string name="privacy_prompt">Select privacy</string>
     <string name="global_privacy">Global</string>
@@ -55,6 +64,7 @@
     <string name="generate_chat">Generate chat group</string>
 
     <string name="add_image_label">Add Image</string>
+    <string name="select_image_prompt">Select Image</string>
 
     <string name="no_name_error">Please enter your name!</string>
     <string name="no_email_error">Please enter your email!</string>
@@ -77,5 +87,6 @@
     <string name="action_filter">Filter</string>
     <string name="action_create">Create Event</string>
     <string name="no_events">No events!</string>
+    <string name="no_clubs">No clubs!</string>
 
 </resources>

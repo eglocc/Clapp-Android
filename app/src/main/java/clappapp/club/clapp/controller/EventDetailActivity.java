@@ -25,12 +25,16 @@ public class EventDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         mDataHelper = DataHelper.getInstance();
-        int position = getIntent().getExtras().getInt(EVENT_POSITION_TAG);
-        mEvent = mDataHelper.getFakeEvents().get(position);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null && extras.containsKey(EVENT_POSITION_TAG)) {
+            int position = extras.getInt(EVENT_POSITION_TAG);
+            mEvent = mDataHelper.getFakeEvents().get(position);
 
-        if (mEvent != null) {
-            SingleEventFragment fragment = SingleEventFragment.newInstance(mEvent, false);
-            getSupportFragmentManager().beginTransaction().replace(R.id.detail_fragment_container, fragment, FRAGMENT_TAG).commit();
+            if (mEvent != null) {
+                SingleEventFragment fragment = SingleEventFragment.newInstance(mEvent, R.layout.fragment_event_detail);
+                getSupportFragmentManager().beginTransaction().replace(R.id.detail_fragment_container, fragment, FRAGMENT_TAG).commit();
+            }
+            getSupportActionBar().setTitle(mEvent.getTitle());
         }
     }
 

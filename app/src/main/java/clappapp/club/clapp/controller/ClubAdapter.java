@@ -83,6 +83,7 @@ public class ClubAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             switch (v.getId()) {
                 case R.id.follow_button:
                     mOnClickListener.clubFollowed((ImageView) v, getAdapterPosition());
+                    break;
                 default:
                     mOnClickListener.clubClicked(getAdapterPosition());
             }

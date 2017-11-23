@@ -9,7 +9,8 @@
         android:paddingBottom="@dimen/default_vertical_margin"
         android:paddingEnd="@dimen/default_horizontal_margin"
         android:paddingStart="@dimen/default_horizontal_margin"
-        android:paddingTop="@dimen/default_vertical_margin">
+        android:paddingTop="@dimen/default_vertical_margin"
+        android:background="?attr/selectableItemBackground">
 
         <ImageView
             android:id="@+id/club_logo"

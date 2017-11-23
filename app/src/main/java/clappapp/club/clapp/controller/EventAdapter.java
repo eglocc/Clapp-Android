@@ -1,6 +1,7 @@
 package clappapp.club.clapp.controller;
 
 import android.databinding.DataBindingUtil;
+import android.graphics.Bitmap;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -25,8 +26,9 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     interface OnClickListener {
         void eventClicked(View v, int position, long id);
-
         void eventFollowed(View v, int position, long id);
+
+        void clubHeaderClicked(long clubID);
     }
 
     private DataHelper mDataHelper;
@@ -69,10 +71,17 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             }
             ((EventCardViewHolder) holder).mEventTitle.setText(event.getTitle());
             ((EventCardViewHolder) holder).mEventDescription.setText(event.getDescription());
-            ((EventCardViewHolder) holder).mEventImage.setImageResource(event.getImageLink());
             ((EventCardViewHolder) holder).mEventDate.setText(event.getDateString());
             ((EventCardViewHolder) holder).mEventTime.setText(event.getTimeString());
             ((EventCardViewHolder) holder).mEventPlace.setText(event.getPlace());
+
+            int imageResourceID = event.getImageLink();
+            Bitmap imageBitmap = event.getImageBitmap();
+            if (imageResourceID != 0) {
+                ((EventCardViewHolder) holder).mEventImage.setImageResource(event.getImageLink());
+            } else if (imageBitmap != null) {
+                ((EventCardViewHolder) holder).mEventImage.setImageBitmap(imageBitmap);
+            }
         }
     }
 
@@ -119,6 +128,7 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             mAddCalendarButton = mBinding.footer.addCalendarButton;
 
             mAddCalendarButton.setOnClickListener(this);
+            mHeaderCard.setOnClickListener(this);
             itemView.setOnClickListener(this);
         }
 
@@ -128,6 +138,10 @@ public class EventAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             switch (v.getId()) {
                 case R.id.add_calendar_button:
                     mOnClickListener.eventFollowed(v, position, mEvents.get(position).getID());
+                    break;
+                case R.id.header_card:
+                    mOnClickListener.clubHeaderClicked(mEvents.get(position).getClubID());
+                    break;
                 default:
                     mOnClickListener.eventClicked(v, position, mEvents.get(position).getID());
             }

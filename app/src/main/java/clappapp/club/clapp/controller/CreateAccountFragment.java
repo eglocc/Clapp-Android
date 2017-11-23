@@ -35,7 +35,8 @@ import clappapp.club.clapp.utilities.EnumUtils;
  */
 public class CreateAccountFragment extends Fragment implements DatePickerDialog.OnDateSetListener, View.OnClickListener {
 
-    private static final String LAYOUT_TAG = "layoutResourceID";
+    private static final String TAG = CreateAccountFragment.class.getSimpleName();
+    private static final String LAYOUT_ID_TAG = "layoutResourceID";
 
     interface Callbacks {
         void next(String email, String name, String surname);
@@ -61,7 +62,7 @@ public class CreateAccountFragment extends Fragment implements DatePickerDialog.
     private Spinner mGenderSpinner;
     private FloatingActionButton mDoneButton;
 
-    private int mLayoutResourceId;
+    private int mLayoutResourceID;
     private ViewDataBinding mBinding;
     private Callbacks mCallback;
     private long mDob;
@@ -74,7 +75,7 @@ public class CreateAccountFragment extends Fragment implements DatePickerDialog.
 
         Bundle args = new Bundle();
 
-        args.putInt(LAYOUT_TAG, layoutResourceID);
+        args.putInt(LAYOUT_ID_TAG, layoutResourceID);
 
         CreateAccountFragment fragment = new CreateAccountFragment();
         fragment.setArguments(args);
@@ -94,14 +95,14 @@ public class CreateAccountFragment extends Fragment implements DatePickerDialog.
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mLayoutResourceId = getArguments().getInt(LAYOUT_TAG);
+        mLayoutResourceID = getArguments().getInt(LAYOUT_ID_TAG);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mBinding = DataBindingUtil.inflate(inflater, mLayoutResourceId, container, false);
-        switch (mLayoutResourceId) {
+        mBinding = DataBindingUtil.inflate(inflater, mLayoutResourceID, container, false);
+        switch (mLayoutResourceID) {
             case R.layout.fragment_create_account_first:
                 initFirstFragment();
                 break;

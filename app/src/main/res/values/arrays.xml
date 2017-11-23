@@ -29,4 +29,18 @@
         <item>@string/gender_prompt</item>
     </string-array>
 
+    <string-array name="main_activity_page_titles">
+        <item>@string/main_feed</item>
+        <item>@string/personal_feed</item>
+        <item>@string/club_search</item>
+        <item>@string/calendar</item>
+        <item>@string/user_profile</item>
+    </string-array>
+
+    <string-array name="create_event_page_titles">
+        <item>@string/create_event_step_one_label</item>
+        <item>@string/create_event_step_two_label</item>
+        <item>@string/create_event_step_three_label</item>
+    </string-array>
+
 </resources>
